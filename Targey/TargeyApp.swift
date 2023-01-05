@@ -10,7 +10,7 @@
  DISCLAIMER PLEASE READ:
  This application is a project and shall not be distrubted to the Apple App Store, Testflight, or significant!!
  
- Product images, merchandise, and other information are provided by RedCircleAPI
+ Product images, merchandise, and other information are provided by RedCircle API
  I do not hold any possession of images or information displayed in the application.
  Target company logos and glyphs are provided by Target.
  I do not hold any possession of them.
