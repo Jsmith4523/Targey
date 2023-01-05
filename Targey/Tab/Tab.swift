@@ -13,7 +13,7 @@ struct Tab: View {
         TabView {
             DiscoverView()
                 .tabItem {
-                    Label("Discover", systemImage: "takeoutbag.and.cup.and.straw.fill")
+                    Label("D", systemImage: "takeoutbag.and.cup.and.straw.fill")
                 }
             ShoppingListView()
                 .tabItem {
