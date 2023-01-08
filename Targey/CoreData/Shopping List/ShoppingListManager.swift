@@ -41,6 +41,7 @@ class ShoppingListManager {
         container.viewContext.delete(shoppingItem)
     }
     
+    ///Remove all ShoppingItem's
     func removeAll() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ShoppingItem")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
