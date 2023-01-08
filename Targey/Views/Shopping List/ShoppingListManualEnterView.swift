@@ -30,10 +30,10 @@ struct ShoppingListManualEnterView: View {
                     TextField("Name of Product", text: $name)
                         .keyboardType(.numbersAndPunctuation)
                     TextField("Retail Price", value: $price, format: .currency(code: .userCurrency))
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                     Stepper("Quantity (\(quantity))", value: $quantity)
                 } header: {
-                    Text("Required")
+                    Text("Required information")
                 }
                 
                 Section {
@@ -74,8 +74,8 @@ struct ShoppingListManualEnterView: View {
     }
     
     private func prepareMerchandise() {
-        let merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: nil, symbol: .userCurrency, regular_price: Double(price))))
-        shopLM.addItemToShoppingList(merchandise) { didSave  in
+        let merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: nil, symbol: .userCurrencySymbol, regular_price: Double(price))))
+        shopLM.addItemToShoppingList(merchandise, quantity: quantity) { didSave  in
             if didSave {
                 dismiss()
             }

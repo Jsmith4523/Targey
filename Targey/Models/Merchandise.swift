@@ -107,6 +107,26 @@ struct product: Decodable {
     let rating_total: Int?
     let main_image: String?
     let images: [String?]?
+    
+    ///Retrieves data from the products main image which can be saved for adding an item to the ShoppingList CoreData Model
+    func productMainImageData() -> Data? {
+        var fetchedData = Data()
+        
+        guard let main_image else {
+            return nil
+        }
+        guard let url = URL(string: main_image) else {
+            return nil
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, err in
+            guard let data, err == nil else {
+                return
+            }
+            fetchedData = data
+        }
+        return fetchedData
+    }
 }
 
 struct offers: Decodable {

@@ -33,15 +33,15 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
         }
     }
     
-    func addItemToShoppingList(_ merchandise: Merchandise, completion: @escaping (Bool) -> Void) {
+    func addItemToShoppingList(_ merchandise: Merchandise, quantity: Int = 1, completion: @escaping (Bool) -> Void) {
         let feedback = UINotificationFeedbackGenerator()
                 
         let shoppingItem      = ShoppingItem(context: manager.container.viewContext)
         shoppingItem.name     = merchandise.product.title
-        shoppingItem.imgData  = merchandise.product.mainProductImageURL
+        shoppingItem.imgData  = merchandise.product.productMainImageData()
         shoppingItem.isOnSale = merchandise.offers.primary.activeSale
         shoppingItem.price    = merchandise.offers.primary.productRegularPrice
-        shoppingItem.quantity = 1
+        shoppingItem.quantity = Int64(quantity)
         
         manager.save { result in
             switch result {
@@ -59,10 +59,15 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     }
 
     func removeItemFromShoppingList(_ shoppingItem: ShoppingItem) {
-        manager.remove(shoppingItem)
+        manager.removeItem(shoppingItem)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             self.fetchItemsFromList()
         }
+    }
+    
+    func removeAllItemsFromShoppingList() {
+        manager.removeAll()
+        fetchItemsFromList()
     }
     
     func fetchItemsFromList() {

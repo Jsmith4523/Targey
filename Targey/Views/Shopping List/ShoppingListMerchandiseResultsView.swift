@@ -104,7 +104,7 @@ fileprivate struct ShoppingListMerchandiseItemCellView: View {
                 Spacer()
                     .frame(height: 10)
                 Button {
-                    
+                    shopLM.didSelectMerchandise(merchandise)
                 } label: {
                     Text("Add")
                         .foregroundColor(.targetRed)

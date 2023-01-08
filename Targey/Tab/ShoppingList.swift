@@ -37,6 +37,9 @@ struct ShoppingListView: View {
                 ShoppingListBarcodeScannerView(shopLM: shopLM)
             }
         }
+        .onAppear {
+            shopLM.fetchItemsFromList()
+        }
     }
 }
 
@@ -49,10 +52,53 @@ fileprivate struct ShoppingListItemsView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 ForEach(shopLM.shoppingItems) { item in
-                    
+                    ShoppingListItemCellView(item: item, shopLM: shopLM)
+                    Divider()
                 }
             }
         }
+        .toolbar {
+            Button("Remove all") {
+                shopLM.removeAllItemsFromShoppingList()
+            }
+            .foregroundColor(.targetRed)
+        }
+    }
+}
+
+struct ShoppingListItemCellView: View {
+    
+    let item: ShoppingItem
+    
+    @ObservedObject var shopLM: ShoppingListViewModel
+    
+    var productImage: Image {
+        guard let data = item.imgData, let uiImage = UIImage(data: data) else {
+            return .placeholderProductImage
+        }
+        return Image(uiImage: uiImage)
+    }
+    
+    var body: some View  {
+        HStack {
+            productImage
+                .resizable()
+                .scaledToFit()
+                .frame(width: 65, height: 65)
+            VStack(alignment: .leading) {
+                Text(item.name ?? "Item")
+                    .font(.system(size: 17).weight(.semibold))
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(3)
+                Text(item.price ?? "")
+                    .font(.system(size: 15))
+                Text("x\(item.quantity)")
+                    .font(.system(size: 15))
+                    .foregroundColor(.gray)
+            }
+            Spacer()
+        }
+        .padding()
     }
 }
 

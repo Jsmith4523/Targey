@@ -37,8 +37,19 @@ class ShoppingListManager {
         }
     }
     
-    func remove(_ shoppingItem: ShoppingItem) {
+    func removeItem(_ shoppingItem: ShoppingItem) {
         container.viewContext.delete(shoppingItem)
+    }
+    
+    func removeAll() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ShoppingItem")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+           try container.viewContext.execute(deleteRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func fetch() -> [ShoppingItem] {

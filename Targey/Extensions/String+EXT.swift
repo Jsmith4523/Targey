@@ -11,4 +11,8 @@ extension String {
     static var userCurrency: String {
         return Locale.current.currencyCode ?? "USD"
     }
+    
+    static var userCurrencySymbol: String {
+        return Locale.current.currencySymbol ?? "$"
+    }
 }
