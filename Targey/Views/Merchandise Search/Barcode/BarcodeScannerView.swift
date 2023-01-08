@@ -13,10 +13,7 @@ struct BarcodeScannerView: View {
     
     @State private var colorScheme: ColorScheme = .dark
     
-    @State private var recWidth: CGFloat = UIScreen.main.bounds.width-100
-    @State private var recHeight: CGFloat = 200
-    
-    @StateObject private var barcodeModel = CameraModel()
+    @StateObject private var cameraModel = CameraModel()
     @StateObject private var searchModel = SearchViewModel()
     
     @Environment (\.dismiss) var dismiss
@@ -25,12 +22,7 @@ struct BarcodeScannerView: View {
         NavigationView {
             ZStack {
                 ZStack(alignment: .bottom) {
-                   CameraSession(cameraModel: barcodeModel)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(.white)
-                                .frame(width: recWidth, height: recHeight)
-                        }
+                    CameraOutputView(cameraModel: cameraModel)
                     LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
                         .frame(height: 350)
                 }
@@ -38,11 +30,11 @@ struct BarcodeScannerView: View {
                 VStack(spacing: 10) {
                     HStack {
                         Spacer()
-                        if barcodeModel.deviceHasTorch {
+                        if cameraModel.deviceHasTorch {
                             Button {
-                                barcodeModel.toggleTorch()
+                                cameraModel.toggleTorch()
                             } label: {
-                                Image(systemName: barcodeModel.torchIsOn ? "bolt.fill" : "bolt")
+                                Image(systemName: cameraModel.torchIsOn ? "bolt.fill" : "bolt")
                                     .barcodeScannerTopButtonsStyle()
                             }
                         }
@@ -60,13 +52,15 @@ struct BarcodeScannerView: View {
                     Text("Most items may not be recognize.")
                         .font(.system(size: 15))
                         .foregroundColor(.white)
-                    NavigationLink(isActive: $isShowingSelectedMerchandiseView) {
-                        SelectedMerchandiseView(merchandise: searchModel.scannedMerchandise!, searchModel: searchModel)
-                            .onDisappear {
-                                colorScheme = .dark
-                                barcodeModel.relaunchSesson()
-                            }
-                    } label: {}
+                    if !(searchModel.scannedMerchandise == nil) {
+                        NavigationLink(isActive: $isShowingSelectedMerchandiseView) {
+                            SelectedMerchandiseView(merchandise: searchModel.scannedMerchandise!, searchModel: searchModel)
+                                .onDisappear {
+                                    colorScheme = .dark
+                                    cameraModel.relaunchSesson()
+                                }
+                        } label: {}
+                    }
                 }
                 .multilineTextAlignment(.center)
                 .padding()
@@ -75,22 +69,22 @@ struct BarcodeScannerView: View {
         .accentColor(.targetRed)
         .alert("Error", isPresented: $searchModel.alertOfFailureToFindItem, actions: {
             Button("Ok") {
-                barcodeModel.relaunchSesson()
+                cameraModel.relaunchSesson()
             }
         }, message: {
             Text("That product could not be found")
         })
         .preferredColorScheme(colorScheme)
         .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium(), .large()], showsIndicator: true, cornerRadius: 30) {
-            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, scannerModel: barcodeModel, searchModel: searchModel)
+            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, scannerModel: cameraModel, searchModel: searchModel)
         }
             
         .onAppear {
-            barcodeModel.setDelegate(barcodeDelegate: searchModel)
-            barcodeModel.beginSetup()
+           cameraModel.setDelegate(barcodeDelegate: searchModel)
+           cameraModel.beginSetup()
         }
         .onDisappear {
-            barcodeModel.session.stopRunning()
+            cameraModel.session.stopRunning()
         }
         .onChange(of: isShowingSelectedMerchandiseView) { _ in
             colorScheme = .light

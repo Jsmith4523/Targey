@@ -23,6 +23,8 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
     
     @Published var zipcode = ""
     
+    @Published var scannedUpc = ""
+    
     @Published var merchandises = [Merchandise]()
     @Published var stores = [Store]()
     @Published var scannedMerchandise: Merchandise?
@@ -30,8 +32,7 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
     var locationManager: LocationServicesManager?
     private let searchManager     = SearchManager()
     private let stockStockManager = StoreStockManager()
-    
-    
+        
     init(locationManager: LocationServicesManager? = nil) {
         self.locationManager = locationManager
     }
@@ -83,25 +84,27 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
     }
     
     func didRecieveBarcodeObjectString(_ barcode: String) {
+        self.scannedUpc = barcode
         self.isFindingScannedProduct = true
         searchManager.fetchProductByTcin(tcin: barcode) { status in
             switch status {
             case .success(let scannedProduct):
                 DispatchQueue.main.async {
-                    self.scannedMerchandise = .init(position: 0,
-                                                    product: .init(title: scannedProduct.title,
-                                                                   link: scannedProduct.link,
-                                                                   tcin: scannedProduct.dpci,
-                                                                   dpci: scannedProduct.dpci,
-                                                                   feature_bullets: scannedProduct.productFeatureBullets,
-                                                                   rating: scannedProduct.rating,
-                                                                   rating_total: nil,
-                                                                   main_image: scannedProduct.main_image?.link,
-                                                                   images: scannedProduct.productImages),
-                                                    offers: .init(primary: .init(price: scannedProduct.buybox_winner.price?.value,
-                                                                  symbol: "$",
-                                                                  regular_price: scannedProduct.buybox_winner.was_price?.value
-                                                                      )))
+                    self.scannedMerchandise = .init(position: 0, product:
+                            .init(title: scannedProduct.title,
+                                  link: scannedProduct.link,
+                                  tcin: scannedProduct.dpci,
+                                  dpci: scannedProduct.dpci,
+                                  feature_bullets: scannedProduct.productFeatureBullets,
+                                  rating: scannedProduct.rating,
+                                  rating_total: nil,
+                                  main_image: scannedProduct.main_image?.link,
+                                  images: scannedProduct.productImages), offers:
+                            .init(primary:
+                                    .init(price: scannedProduct.buybox_winner.price?.value,
+                                          symbol: "$", regular_price:
+                                            scannedProduct.buybox_winner.was_price?.value
+                                         )))
                     self.isFindingScannedProduct = false
                     self.isShowingScannedProductView.toggle()
                 }

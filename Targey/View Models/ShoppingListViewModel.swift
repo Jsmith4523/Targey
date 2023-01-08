@@ -15,7 +15,7 @@ protocol ShoppingListDelegate {
 }
 
 final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
-    
+
     @Published var shoppingItems = [ShoppingItem]()
     
     @Published var alertErrorOfSavingItem = false
@@ -28,10 +28,12 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     private let manager = ShoppingListManager.shared
     
     func didSelectMerchandise(_ merchandise: Merchandise) {
-        addItemToShoppingList(merchandise)
+        addItemToShoppingList(merchandise) { _ in
+            
+        }
     }
     
-    func addItemToShoppingList(_ merchandise: Merchandise) {
+    func addItemToShoppingList(_ merchandise: Merchandise, completion: @escaping (Bool) -> Void) {
         let feedback = UINotificationFeedbackGenerator()
                 
         let shoppingItem      = ShoppingItem(context: manager.container.viewContext)
@@ -46,14 +48,16 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
             case .success(_):
                 feedback.notificationOccurred(.success)
                 self.fetchItemsFromList()
+                completion(true)
             case .failure(let reason):
                 feedback.notificationOccurred(.error)
                 self.alertErrorOfSavingItem.toggle()
                 self.alertErrorReason = reason.localizedDescription
+                completion(false)
             }
         }
     }
-        
+
     func removeItemFromShoppingList(_ shoppingItem: ShoppingItem) {
         manager.remove(shoppingItem)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {

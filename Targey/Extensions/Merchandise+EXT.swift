@@ -71,16 +71,18 @@ extension product {
     var productImagesURL: [URL] {
         var urls = [URL]()
         
-        self.images.forEach { string in
-            guard let urlString = string else {
-                return
+        if let images {
+            images.forEach { string in
+                guard let urlString = string else {
+                    return
+                }
+                
+                guard let url = URL(string: urlString) else {
+                    return
+                }
+                
+                urls.append(url)
             }
-            
-            guard let url = URL(string: urlString) else {
-                return
-            }
-            
-            urls.append(url)
         }
         
         return urls

@@ -30,6 +30,12 @@ struct ShoppingListView: View {
             .sheet(isPresented: $shopLM.isShowingSearchView) {
                 ShoppingListMerchandiseSearchView(shopLM: shopLM)
             }
+            .sheet(isPresented: $shopLM.isShowingManualView) {
+                ShoppingListManualEnterView(shopLM: shopLM)
+            }
+            .fullScreenCover(isPresented: $shopLM.isShowingScannerView) {
+                ShoppingListBarcodeScannerView(shopLM: shopLM)
+            }
         }
     }
 }
@@ -83,7 +89,7 @@ fileprivate struct AddShoppingItemButton: View {
                 Spacer()
                 Menu {
                     Button {
-                        shopLM.isShowingSearchView.toggle()
+                        shopLM.isShowingScannerView.toggle()
                     } label: {
                         Label("Scan", systemImage: "iphone.rear.camera")
                     }

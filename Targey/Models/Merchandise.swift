@@ -106,7 +106,7 @@ struct product: Decodable {
     let rating: Double?
     let rating_total: Int?
     let main_image: String?
-    let images: [String?]
+    let images: [String?]?
 }
 
 struct offers: Decodable {
