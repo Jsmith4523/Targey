@@ -21,6 +21,10 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     @Published var alertErrorOfSavingItem = false
     @Published var alertErrorReason = ""
     
+    @Published var isShowingSearchView = false
+    @Published var isShowingScannerView = false
+    @Published var isShowingManualView = false
+    
     private let manager = ShoppingListManager.shared
     
     func didSelectMerchandise(_ merchandise: Merchandise) {

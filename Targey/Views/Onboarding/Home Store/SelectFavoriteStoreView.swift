@@ -48,7 +48,10 @@ struct SelectFavoriteStoreView: View {
             }
         }
         .interactiveDismissDisabled()
-        .customSheetView(isPresented: $locationManager.isShowingSelectedStoreView, child: SelectedStoreView(selectedStore: $selectedStore, locationManager: locationManager), detents: [.medium()], showsIndicator: false, cornerRadius: 30)
+        .customSheetView(isPresented: $locationManager.isShowingSelectedStoreView, detents: [.medium()], showsIndicator: false, cornerRadius: 30) {
+            SelectedStoreView(selectedStore: $selectedStore, locationManager: locationManager)
+            
+        }
         .onAppear {
             self.getNearbyStores()
         }

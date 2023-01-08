@@ -80,8 +80,7 @@ fileprivate struct ScannerButton: View {
         }
     }
 }
-
-fileprivate struct HangTightProgressView: View {
+ struct HangTightProgressView: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
@@ -96,8 +95,7 @@ fileprivate struct HangTightProgressView: View {
         .padding()
     }
 }
-
-fileprivate struct SearchResults: View {
+ struct SearchResults: View {
     
     @Binding var searchField: String
     
@@ -180,8 +178,7 @@ struct MerchandiseItemCellView: View {
         }
     }
 }
-
-fileprivate struct SearchInstruction: View {
+ struct SearchInstruction: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
@@ -197,7 +194,23 @@ fileprivate struct SearchInstruction: View {
     }
 }
 
-fileprivate struct NoResultsFoundView: View {
+
+fileprivate struct ShoppingListResults: View {
+    
+    @ObservedObject var shopLM: ShoppingListViewModel
+    
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                ForEach(shopLM.shoppingItems) { item in
+                    
+                }
+            }
+        }
+    }
+}
+
+ struct NoResultsFoundView: View {
     
     var body: some View {
         VStack(alignment: .center) {

@@ -89,12 +89,10 @@ struct SelectedMerchandiseView: View {
             }
         }
         .accentColor(.targetRed)
-        .customSheetView(isPresented: $isShowingActivityView,
-                         child: ActivityController(activities: [product.targetURL]).edgesIgnoringSafeArea(.bottom),
-                         detents: [.medium(), .large()],
-                         showsIndicator: false,
-                         cornerRadius: 15
-        )
+        .customSheetView(isPresented: $isShowingActivityView, detents: [.medium(), .large()], showsIndicator: false, cornerRadius: 15) {
+            ActivityController(activities: [product.targetURL]).edgesIgnoringSafeArea(.bottom)
+            
+        }
         .sheet(isPresented: $isShowingStoreStockView) {
             StoresInStockView(merchandise: merchandise)
         }

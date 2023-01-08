@@ -42,7 +42,7 @@ extension View {
     }
     
     ///Custom bindale UISheetPresentationController with detents and other parameters for SwiftUI views.
-    func customSheetView<Content: View>(isPresented: Binding<Bool>, child: Content, detents: [UISheetPresentationController.Detent] = [.medium(), .large()], showsIndicator: Bool = false, cornerRadius: CGFloat = 15) -> some View {
+    func customSheetView<Content: View>(isPresented: Binding<Bool>, detents: [UISheetPresentationController.Detent] = [.medium(), .large()], showsIndicator: Bool = false, cornerRadius: CGFloat = 15, child: @escaping () -> Content) -> some View {
         return self
             .background(content: {
                 CustomSheetView(isPresented: isPresented, detents: detents, showsIndicator: showsIndicator, cornerRadius: cornerRadius, child: child)
@@ -58,7 +58,7 @@ struct CustomSheetView<Content: View>: UIViewControllerRepresentable {
     let detents: [UISheetPresentationController.Detent]
     let showsIndicator: Bool
     let cornerRadius: CGFloat
-    let child: Content
+    let child: () -> Content
         
     func makeUIViewController(context: Context) -> UIViewController {
         return UIViewController()
@@ -87,15 +87,15 @@ class DetentiveController<Content: View>: UIHostingController<Content> {
     let detents: [UISheetPresentationController.Detent]
     let showIndicator: Bool
     let cornerRadius: CGFloat
-    let content: Content
+    let content: () -> Content
     
-    init(detents: [UISheetPresentationController.Detent], showIndicator: Bool, cornerRadius: CGFloat, content: Content) {
+    init(detents: [UISheetPresentationController.Detent], showIndicator: Bool, cornerRadius: CGFloat, content: @escaping () -> Content) {
         self.detents        = detents
         self.showIndicator  = showIndicator
         self.cornerRadius   = cornerRadius
         self.content        = content
         
-        super.init(rootView: content)
+        super.init(rootView: content())
     }
     
     required init?(coder aDecoder: NSCoder) {

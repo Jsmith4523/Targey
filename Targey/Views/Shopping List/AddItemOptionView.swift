@@ -18,21 +18,35 @@ struct AddItemOptionView: View {
     }
     
     let options: [Option] = [
-        .init(title: "Scan", image: ""),
-        .init(title: "Search", image: ""),
-        .init(title: "Manual", image: "")
+        .init(title: "Scan", image: "iphone.rear.camera"),
+        .init(title: "Search", image: "magnifyingglass"),
+        .init(title: "Manual", image: "text.badge.plus")
     ]
     
     var body: some View {
         NavigationView {
-            HStack {
-                ForEach(options) { option in
-                    
+            VStack {
+                HStack {
+                    ForEach(options) { option in
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            VStack {
+                                Image(systemName: option.image)
+                                    .shoppingListSelectionOptionButtonStyle()
+                                Text(option.title)
+                                    .font(.system(size: 14).bold())
+                                    .foregroundColor(.reversed)
+                            }
+                        }
+                        Spacer()
+                    }
                 }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Select an Option")
+                    Text("Select Option")
                         .font(.system(size: 18).bold())
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -40,10 +54,10 @@ struct AddItemOptionView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark")
+                            .accentColor(.targetRed)
                     }
                 }
             }
-            .accentColor(.targetRed)
         }
     }
 }

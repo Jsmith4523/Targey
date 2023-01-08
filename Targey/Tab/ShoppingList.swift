@@ -13,30 +13,45 @@ struct ShoppingListView: View {
     @StateObject private var shopLM = ShoppingListViewModel()
     
     @State private var isShowingBarcodeScannerView = false
-    @State private var isShowingAddOptionsView = false
     
     var body: some View {
         NavigationView {
             ZStack {
                 switch shopLM.shoppingItems.isEmpty {
                 case true:
-                    ListIsEmptyView(isShowingAddOptionsView: $isShowingAddOptionsView)
+                    ListIsEmptyView()
                 case false:
-                    ShoppingListResults(shopLM: shopLM)
+                    ShoppingListItemsView(shopLM: shopLM)
                 }
+                AddShoppingItemButton(shopLM: shopLM)
             }
             .navigationTitle("Shopping List")
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $shopLM.isShowingSearchView) {
+                ShoppingListMerchandiseSearchView(shopLM: shopLM)
+            }
         }
     }
 }
 
 
+fileprivate struct ShoppingListItemsView: View {
+    
+    @ObservedObject var shopLM: ShoppingListViewModel
+    
+    var body: some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                ForEach(shopLM.shoppingItems) { item in
+                    
+                }
+            }
+        }
+    }
+}
 
 fileprivate struct ListIsEmptyView: View {
-    
-    @Binding var isShowingAddOptionsView: Bool
-    
+        
     var body: some View {
         VStack {
             Spacer()
@@ -57,30 +72,31 @@ fileprivate struct ListIsEmptyView: View {
     }
 }
 
-fileprivate struct ShoppingListResults: View {
-    
-    @ObservedObject var shopLM: ShoppingListViewModel
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack {
-                ForEach(shopLM.shoppingItems) { item in
-                    
-                }
-            }
-        }
-    }
-}
-
 fileprivate struct AddShoppingItemButton: View {
     
+    @ObservedObject var shopLM: ShoppingListViewModel
+        
     var body: some View {
         VStack {
             Spacer()
             HStack {
                 Spacer()
                 Menu {
-                    
+                    Button {
+                        shopLM.isShowingSearchView.toggle()
+                    } label: {
+                        Label("Scan", systemImage: "iphone.rear.camera")
+                    }
+                    Button {
+                        shopLM.isShowingSearchView.toggle()
+                    } label: {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                    Button {
+                        shopLM.isShowingManualView.toggle()
+                    } label: {
+                        Label("Manual", systemImage: "plus")
+                    }
                 } label: {
                     Image(systemName: "plus")
                         .largeButtonStyle()

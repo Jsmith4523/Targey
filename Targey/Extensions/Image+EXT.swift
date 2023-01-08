@@ -65,4 +65,15 @@ extension Image {
             .frame(width: 115, height: 115)
             .cornerRadius(5)
     }
+    
+    func shoppingListSelectionOptionButtonStyle() -> some View {
+        return self
+            .resizable()
+            .scaledToFit()
+            .frame(width: 25, height: 25)
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(Circle())
+            .foregroundColor(.targetRed)
+    }
 }

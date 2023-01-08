@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct Tab: View {
-        
     var body: some View {
         TabView {
             DiscoverView()
                 .tabItem {
-                    Label("D", systemImage: "takeoutbag.and.cup.and.straw.fill")
+                    Label("Discover", systemImage: "takeoutbag.and.cup.and.straw.fill")
                 }
             ShoppingListView()
                 .tabItem {
@@ -23,7 +22,6 @@ struct Tab: View {
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-            
         }
         .accentColor(.targetRed)
     }

@@ -81,16 +81,10 @@ struct BarcodeScannerView: View {
             Text("That product could not be found")
         })
         .preferredColorScheme(colorScheme)
-        .customSheetView(isPresented: $searchModel.isShowingScannedProductView,
-                         child: ScannedProductView(
-                            isShowingSelectedProductView: $isShowingSelectedMerchandiseView,
-                            scannerModel: barcodeModel,
-                            searchModel: searchModel
-                         ),
-                         detents: [.medium(), .large()],
-                         showsIndicator: true,
-                         cornerRadius: 30
-        )
+        .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium(), .large()], showsIndicator: true, cornerRadius: 30) {
+            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, scannerModel: barcodeModel, searchModel: searchModel)
+        }
+            
         .onAppear {
             barcodeModel.setDelegate(barcodeDelegate: searchModel)
             barcodeModel.beginSetup()
