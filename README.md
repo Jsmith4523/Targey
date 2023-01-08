@@ -26,7 +26,7 @@ At the end of completing most of the challenging problems came learning:
 - Using @escaping closures and Result for either a success or faiure of network calls.
 - Error handling of poor and interrupted network calls.
 - CLLocationManager for device autorization status, current location, and nearby Target Stores based its coordinates.
-- API Keys encrypting.
+- CoreData 
 - AVMetaDataOutput for detecting specified metadata object types.
 - Introduction to application onboarding.
 - Retrieving users zip code from CLGeoCoder and feeding it to the RedCircle API for nearby store stock information.
