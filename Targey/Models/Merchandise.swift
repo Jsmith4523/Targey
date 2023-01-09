@@ -109,23 +109,24 @@ struct product: Decodable {
     let images: [String?]?
     
     ///Retrieves data from the products main image which can be saved for adding an item to the ShoppingList CoreData Model
-    func productMainImageData() -> Data? {
-        var fetchedData = Data()
+    func productMainImasgeData(completion: @escaping (Data?) -> Void) {
         
         guard let main_image else {
-            return nil
+            completion(nil)
+            return
         }
         guard let url = URL(string: main_image) else {
-            return nil
+            completion(nil)
+            return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, err in
             guard let data, err == nil else {
+                completion(nil)
                 return
             }
-            fetchedData = data
+            completion(data)
         }.resume()
-        return fetchedData
     }
 }
 

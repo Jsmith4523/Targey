@@ -76,6 +76,7 @@ struct ShoppingListItemCellView: View {
         guard let data = item.imgData, let uiImage = UIImage(data: data) else {
             return .placeholderProductImage
         }
+        print(data)
         return Image(uiImage: uiImage)
     }
     
