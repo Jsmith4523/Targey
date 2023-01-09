@@ -124,7 +124,7 @@ struct product: Decodable {
                 return
             }
             fetchedData = data
-        }
+        }.resume()
         return fetchedData
     }
 }
