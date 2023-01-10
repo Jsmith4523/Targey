@@ -19,7 +19,7 @@ struct ShoppingListBarcodeScannerView: View {
     
     var body: some View {
         ZStack {
-            CameraOutputView(cameraModel: cameraModel)
+            BarcodeScannerOutputView(cameraModel: cameraModel)
             VStack {
                 HStack {
                     Spacer()

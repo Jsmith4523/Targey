@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CameraOutputView: View {
+struct BarcodeScannerOutputView: View {
     
     @State private var recWidth: CGFloat = UIScreen.main.bounds.width-100
     @State private var recHeight: CGFloat = 200

@@ -226,6 +226,7 @@
 		240C76382953CF8900C25880 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				24A2DAE5296DE1FD00C79807 /* Promotions */,
 				241EE925296021EA005F41D9 /* Shopping List */,
 				24F6A02D29544F600032D4B3 /* Merchandise Search */,
 				24F6A03229557D4C0032D4B3 /* Onboarding */,
@@ -264,6 +265,13 @@
 				24A2DAE3296DE12B00C79807 /* PromotionsManager.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		24A2DAE5296DE1FD00C79807 /* Promotions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Promotions;
 			sourceTree = "<group>";
 		};
 		24BB47072958E7A000F48821 /* Barcode */ = {

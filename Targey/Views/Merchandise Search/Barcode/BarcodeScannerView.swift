@@ -22,7 +22,7 @@ struct BarcodeScannerView: View {
         NavigationView {
             ZStack {
                 ZStack(alignment: .bottom) {
-                    CameraOutputView(cameraModel: cameraModel)
+                    BarcodeScannerOutputView(cameraModel: cameraModel)
                     LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
                         .frame(height: 350)
                 }
