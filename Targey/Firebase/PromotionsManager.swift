@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseStorage
+import FirebaseDatabase
 
 
 enum PMFetchError: Error {
@@ -14,7 +16,17 @@ enum PMFetchError: Error {
 
 final class PromotionsManager {
     
+    private let database = Database.database()
+    
     func fetchAllPromotions(completion: (Result<[Promotion], PMFetchError>)) {
-        
+        database.reference().getData { err, snapshot in
+            guard err == nil, let value = snapshot?.value else {
+                return
+            }
+            
+            if let value = value as? [String: [String: Any]] {
+                
+            }
+        }
     }
 }

@@ -76,7 +76,7 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     
     func removeAllItemsFromShoppingList() {
         manager.removeAll()
-        fetchItemsFromList()
+        self.shoppingItems = []
     }
     
     func fetchItemsFromList() {
