@@ -59,6 +59,12 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
         }
     }
     
+    func suspendCurrentSearchTask() {
+        Task {
+            await searchManager.suspendTask()
+        }
+    }
+    
     func didRecieveUserZipCode(_ zipcode: String) {
         self.zipcode = zipcode
     }

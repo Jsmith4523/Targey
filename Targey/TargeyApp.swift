@@ -18,6 +18,7 @@
  */
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct TargeyApp: App {
@@ -49,6 +50,8 @@ struct TargeyApp: App {
 class AppDegelate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        FirebaseApp.configure()
         
         let appearance = UITabBarAppearance()
         

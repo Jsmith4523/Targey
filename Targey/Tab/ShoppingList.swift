@@ -19,7 +19,7 @@ struct ShoppingListView: View {
             ZStack {
                 switch shopLM.shoppingItems.isEmpty {
                 case true:
-                    ListIsEmptyView()
+                    ShoppingListEmptyView()
                 case false:
                     ShoppingListItemsView(shopLM: shopLM)
                 }
@@ -98,28 +98,6 @@ struct ShoppingListItemCellView: View {
                     .foregroundColor(.gray)
             }
             Spacer()
-        }
-        .padding()
-    }
-}
-
-fileprivate struct ListIsEmptyView: View {
-        
-    var body: some View {
-        VStack {
-            Spacer()
-            Image.dogBag
-                .resizable()
-                .scaledToFit()
-                .frame(width: 65, height: 65)
-                .padding()
-            Text("Your List is Empty")
-                .font(.system(size: 23).bold())
-            Text("Stay organized by adding everyday items that you can't live without.")
-                .multilineTextAlignment(.center)
-                .padding()
-            Spacer()
-                
         }
         .padding()
     }

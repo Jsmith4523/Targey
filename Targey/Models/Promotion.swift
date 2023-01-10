@@ -12,5 +12,13 @@ struct Promotion: Identifiable, Codable {
     var id = UUID()
     var title: String
     var prompt: String
+    var searchTerm: String
     var bannerImgURL: String
+    
+    var bannerURL: URL? {
+        guard let url = URL(string: bannerImgURL) else {
+            return nil
+        }
+        return url
+    }
 }

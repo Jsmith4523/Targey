@@ -19,32 +19,33 @@ struct ShoppingListMerchandiseSearchView: View {
     @Environment (\.dismiss) var dismiss
     
     var body: some View {
-        VStack {
-            TextField("Search", text: $searchField) {
-                searchModel.fetchForProducts(term: searchField)
-            }
-            .textFieldStyle(.roundedBorder)
-            .padding()
-            Spacer()
-            ZStack {
+        NavigationView {
+            VStack {
+                HStack {
+                    TextField("Search", text: $searchField) {
+                        searchModel.fetchForProducts(term: searchField)
+                    }
+                    .textFieldStyle(.roundedBorder)
+                    Spacer()
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+                .padding()
                 switch searchModel.isSearching {
                 case true:
-                    HangTightProgressView()
+                    DogProgessView()
                 case false:
                     switch searchModel.didFailToSearch {
                     case true:
                         NoResultsFoundView()
                     case false:
-                        switch searchField.isEmpty {
-                        case true:
-                            EmptyView()
-                        case false:
-                            ShoppingListMerchandiseSearchResults(searchModel: searchModel, shopLM: shopLM)
-                        }
+                        ShoppingListMerchandiseSearchResults(searchModel: searchModel, shopLM: shopLM)
                     }
                 }
             }
         }
+        .accentColor(.targetRed)
     }
 }
 

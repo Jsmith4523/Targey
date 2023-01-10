@@ -19,6 +19,11 @@ class SearchManager: RedCircle {
         super.init(resourceName: resourceName)
     }
     
+    func suspendTask() async {
+        await Task.yield()
+    }
+    
+
     func fetchProducts(term: String, completion: @escaping (Result<[Merchandise], FetchError>) -> Void) {
         
         let connectedTerm = term.replacingOccurrences(of: " ", with: "+")
