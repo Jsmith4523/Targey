@@ -31,6 +31,7 @@
 		2499532E296A657500978543 /* ShoppingListManualEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499532D296A657500978543 /* ShoppingListManualEnterView.swift */; };
 		24995330296A791700978543 /* String+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499532F296A791700978543 /* String+EXT.swift */; };
 		24A2DAE1296DE08700C79807 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A2DAE0296DE08700C79807 /* Promotion.swift */; };
+		24A2DAE4296DE12B00C79807 /* PromotionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A2DAE3296DE12B00C79807 /* PromotionsManager.swift */; };
 		24BB47062958E79C00F48821 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB47052958E79C00F48821 /* BarcodeScannerView.swift */; };
 		24BB47092958E7D700F48821 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB47082958E7D700F48821 /* CameraModel.swift */; };
 		24BB470B295936B600F48821 /* Scanned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB470A295936B600F48821 /* Scanned.swift */; };
@@ -86,6 +87,7 @@
 		2499532D296A657500978543 /* ShoppingListManualEnterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListManualEnterView.swift; sourceTree = "<group>"; };
 		2499532F296A791700978543 /* String+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+EXT.swift"; sourceTree = "<group>"; };
 		24A2DAE0296DE08700C79807 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
+		24A2DAE3296DE12B00C79807 /* PromotionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsManager.swift; sourceTree = "<group>"; };
 		24BB47052958E79C00F48821 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		24BB47082958E7D700F48821 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		24BB470A295936B600F48821 /* Scanned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanned.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				240C76282952A5CD00C25880 /* Extensions */,
 				240C763B2953D27600C25880 /* Models */,
 				240C76352952DD0C00C25880 /* View Models */,
+				24A2DAE2296DE0D600C79807 /* Firebase */,
 				240C76322952DB2800C25880 /* RedCircle API */,
 				24F6A03929557FC60032D4B3 /* CoreData */,
 				240C76382953CF8900C25880 /* Views */,
@@ -253,6 +256,14 @@
 				2499532D296A657500978543 /* ShoppingListManualEnterView.swift */,
 			);
 			path = "Shopping List";
+			sourceTree = "<group>";
+		};
+		24A2DAE2296DE0D600C79807 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				24A2DAE3296DE12B00C79807 /* PromotionsManager.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		24BB47072958E7A000F48821 /* Barcode */ = {
@@ -409,6 +420,7 @@
 				2499532A296A601100978543 /* CameraOutputView.swift in Sources */,
 				24F6A02A29544AD60032D4B3 /* UINav+EXT.swift in Sources */,
 				240C76342952DB4700C25880 /* SearchManager.swift in Sources */,
+				24A2DAE4296DE12B00C79807 /* PromotionsManager.swift in Sources */,
 				24F6A040295590140032D4B3 /* ShoppingListManager.swift in Sources */,
 				24F6A02F295503D50032D4B3 /* Store.swift in Sources */,
 				240C76372952DD1C00C25880 /* SearchViewModel.swift in Sources */,
