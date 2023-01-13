@@ -7,64 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "42584496-01E1-43E0-AC7A-3C7392323C14"
+            uuid = "EB3D8CCA-B4AA-406B-ABB6-541393EB7647"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Targey/Extensions/UINav+EXT.swift"
+            filePath = "Targey/View Models/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "viewIsPresented()"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "fetchFavoriteSavedStore()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "04627736-6013-48A6-B3EF-6DB670E79829"
+            uuid = "A50BFA5C-3A6B-4E1E-BCE0-E6CE84EA4132"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Targey/Extensions/UINav+EXT.swift"
+            filePath = "Targey/View Models/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "viewIsPresented()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F2B7DE22-F53A-4B26-8C46-0887EE8CEBD2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Targey/Extensions/UINav+EXT.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "revertToOriginal()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0CDD3B79-85C4-4631-B563-B300FCC2D16B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Targey/Extensions/UINav+EXT.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "revertToOriginal()"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "fetchFavoriteSavedStore()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

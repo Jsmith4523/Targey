@@ -28,6 +28,7 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
     @Published var status: CLAuthorizationStatus?
     @Published var alertFailedToSaveStore = false
     
+    @Published var isShowingSelectNearbyStoreView = false
     @Published var isShowNearbyStoreView = false
     @Published var isShowingSelectedStoreView = false
     
@@ -38,12 +39,14 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
         super.init()
         
         manager.delegate = self
-        
-        if let favoriteStore = UserDefaults.standard.data(forKey: "favoriteStore") {
-            if let decodedStore = try? JSONDecoder().decode(NearbyStore.self, from: favoriteStore) {
-                self.favoriteStore = decodedStore
-            }
-        }
+        self.fetchFavoriteSavedStore()
+//
+//        if let favoriteStore = UserDefaults.standard.data(forKey: "favoriteStore") {
+//            if let decodedStore = try? JSONDecoder().decode(NearbyStore.self, from: favoriteStore) {
+//                print(decodedStore)
+//                self.favoriteStore = decodedStore
+//            }
+//        }
     }
     
     func setDelegate(userZipCode: UserZipCodeDelegate) {
@@ -125,6 +128,23 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
                 completion(postalCode)
             }
         }
+    }
+    
+    private func fetchFavoriteSavedStore() {
+        if let favoriteStore = UserDefaults.standard.data(forKey: "favoriteStore") {
+            if let decodedStore = try? JSONDecoder().decode(NearbyStore.self, from: favoriteStore) {
+                print(decodedStore)
+                self.favoriteStore = decodedStore
+            }
+        } else {
+            self.favoriteStore = nil
+        }
+    }
+    
+    func removeFavoriteStore() {
+        let encoder = JSONEncoder()
+        UserDefaults.standard.set(Data(), forKey: "favoriteStore")
+        fetchFavoriteSavedStore()
     }
     
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {

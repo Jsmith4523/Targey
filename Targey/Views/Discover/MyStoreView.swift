@@ -13,24 +13,19 @@ struct MyStoreView: View {
     @StateObject private var locationM = LocationServicesManager()
     
     var body: some View {
-        if let favoriteStore = locationM.favoriteStore {
-            MyStoreInformationView(favoriteStore: favoriteStore)
-        } else {
-            MyStoreNotSelectView(locationM: locationM)
+        ZStack {
+            if let favoriteStore = locationM.favoriteStore {
+                MyStoreCard(favoriteStore: favoriteStore, locationM: locationM)
+            } else {
+                MyStoreNotSelectView(locationM: locationM)
+            }
+        }
+        .sheet(isPresented: $locationM.isShowingSelectNearbyStoreView) {
+            SelectFavoriteStoreView(locationManager: locationM)
         }
     }
 }
 
-fileprivate struct MyStoreInformationView: View {
-    
-    let favoriteStore: NearbyStore
-    
-    var body: some View {
-        VStack {
-            
-        }
-    }
-}
 
 struct MyStoreView_Previews: PreviewProvider {
     static var previews: some View {

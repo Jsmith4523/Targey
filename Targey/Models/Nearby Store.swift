@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 ///Only use for retrieving neabry store through MKPointOfInterest; use 'Store' for RedCircle stock API call
 struct NearbyStore: Identifiable, Comparable, Codable {
@@ -15,6 +16,7 @@ struct NearbyStore: Identifiable, Comparable, Codable {
     var lat: Double
     var lon: Double
     
+    
     static func > (lhs: NearbyStore, rhs: NearbyStore) -> Bool {
         lhs.name > rhs.name
     }
@@ -23,5 +25,12 @@ struct NearbyStore: Identifiable, Comparable, Codable {
     }
     static func == (lhs: NearbyStore, rhs: NearbyStore) -> Bool {
         return false
+    }
+}
+
+extension NearbyStore {
+    
+    var coordinates: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
 }

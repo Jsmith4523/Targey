@@ -25,6 +25,8 @@
 		241EE922295F6F9B005F41D9 /* Shopping List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE921295F6F9B005F41D9 /* Shopping List.swift */; };
 		241EE924295F7629005F41D9 /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */; };
 		243BBC0029711A010098872A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243BBBFF29711A010098872A /* ViewController.swift */; };
+		246A012E2971F4C700797654 /* MyStoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A012D2971F4C700797654 /* MyStoreCard.swift */; };
+		246A0130297203DE00797654 /* MyStoreInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246A012F297203DE00797654 /* MyStoreInformationView.swift */; };
 		2486C233296B2D2B00A693E6 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2486C231296B2D2B00A693E6 /* ShoppingList.xcdatamodeld */; };
 		2499532A296A601100978543 /* CameraOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24995329296A601100978543 /* CameraOutputView.swift */; };
 		2499532C296A60D100978543 /* ShoppingListBarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499532B296A60D100978543 /* ShoppingListBarcodeScannerView.swift */; };
@@ -97,6 +99,8 @@
 		241EE921295F6F9B005F41D9 /* Shopping List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shopping List.swift"; sourceTree = "<group>"; };
 		241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
 		243BBBFF29711A010098872A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		246A012D2971F4C700797654 /* MyStoreCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreCard.swift; sourceTree = "<group>"; };
+		246A012F297203DE00797654 /* MyStoreInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreInformationView.swift; sourceTree = "<group>"; };
 		2486C232296B2D2B00A693E6 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
 		24995329296A601100978543 /* CameraOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOutputView.swift; sourceTree = "<group>"; };
 		2499532B296A60D100978543 /* ShoppingListBarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListBarcodeScannerView.swift; sourceTree = "<group>"; };
@@ -404,6 +408,8 @@
 			isa = PBXGroup;
 			children = (
 				24F5BE66297093C5004BC04F /* MyStoreView.swift */,
+				246A012D2971F4C700797654 /* MyStoreCard.swift */,
+				246A012F297203DE00797654 /* MyStoreInformationView.swift */,
 				24F5BE692970978A004BC04F /* MyStoreNotSelectedView.swift */,
 			);
 			name = "My Store";
@@ -626,10 +632,12 @@
 				243BBC0029711A010098872A /* ViewController.swift in Sources */,
 				240C763D2953D27E00C25880 /* Merchandise.swift in Sources */,
 				240C761B2952A52100C25880 /* TargeyApp.swift in Sources */,
+				246A0130297203DE00797654 /* MyStoreInformationView.swift in Sources */,
 				24C4286F295A56F6006CDE35 /* SelectedStoreInStockView.swift in Sources */,
 				24C42873295A59F7006CDE35 /* RedCircle.swift in Sources */,
 				24A2DAF8296DF4A000C79807 /* SelectedPromotonResultsView.swift in Sources */,
 				24F6A0312955091B0032D4B3 /* StoreStockManager.swift in Sources */,
+				246A012E2971F4C700797654 /* MyStoreCard.swift in Sources */,
 				24BB470F2959466600F48821 /* Nearby Store.swift in Sources */,
 				24F6A03429557DAC0032D4B3 /* WelcomeView.swift in Sources */,
 				24BB47112959468F00F48821 /* ScannedProductView.swift in Sources */,

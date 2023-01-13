@@ -14,12 +14,13 @@ struct DiscoverView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 40) {
+                Spacer()
+                    .frame(height: 5)
+                VStack(spacing: 20) {
                     MyStoreView()
                     DiscoverContentSection(header: "Promotions") {
                         PromotionsView()
                     }
-                    
                 }
             }
             .navigationTitle("Discover")

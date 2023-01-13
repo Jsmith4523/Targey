@@ -9,9 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MyStoreNotSelectView: View {
-    
-    @State private var isShowingSelectNearbyStoreView = false
-    
+        
     @ObservedObject var locationM: LocationServicesManager
     
     var body: some View {
@@ -30,7 +28,7 @@ struct MyStoreNotSelectView: View {
                 Spacer()
                     .frame(height: 5)
                 Button("Find Store") {
-                    isShowingSelectNearbyStoreView.toggle()
+                    locationM.isShowingSelectNearbyStoreView.toggle()
                 }
                 .font(.system(size: 13).bold())
                 .foregroundColor(.targetRed)
@@ -41,8 +39,5 @@ struct MyStoreNotSelectView: View {
         .frame(width: UIScreen.main.bounds.width-50)
         .background(.ultraThinMaterial)
         .cornerRadius(15)
-        .sheet(isPresented: $isShowingSelectNearbyStoreView) {
-            SelectFavoriteStoreView(locationManager: locationM)
-        }
     }
 }
