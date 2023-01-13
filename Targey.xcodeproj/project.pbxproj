@@ -24,6 +24,7 @@
 		240C76482954186E00C25880 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240C76472954186E00C25880 /* Search.swift */; };
 		241EE922295F6F9B005F41D9 /* Shopping List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE921295F6F9B005F41D9 /* Shopping List.swift */; };
 		241EE924295F7629005F41D9 /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */; };
+		243BBC0029711A010098872A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243BBBFF29711A010098872A /* ViewController.swift */; };
 		2486C233296B2D2B00A693E6 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2486C231296B2D2B00A693E6 /* ShoppingList.xcdatamodeld */; };
 		2499532A296A601100978543 /* CameraOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24995329296A601100978543 /* CameraOutputView.swift */; };
 		2499532C296A60D100978543 /* ShoppingListBarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499532B296A60D100978543 /* ShoppingListBarcodeScannerView.swift */; };
@@ -95,6 +96,7 @@
 		240C76472954186E00C25880 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		241EE921295F6F9B005F41D9 /* Shopping List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shopping List.swift"; sourceTree = "<group>"; };
 		241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
+		243BBBFF29711A010098872A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2486C232296B2D2B00A693E6 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
 		24995329296A601100978543 /* CameraOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOutputView.swift; sourceTree = "<group>"; };
 		2499532B296A60D100978543 /* ShoppingListBarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListBarcodeScannerView.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				240C76322952DB2800C25880 /* RedCircle API */,
 				24F6A03929557FC60032D4B3 /* CoreData */,
 				240C76382953CF8900C25880 /* Views */,
+				243BBBFE297119E50098872A /* UIKit */,
 				240C762B2952A64300C25880 /* Tab */,
 				240C76202952A52400C25880 /* Preview Content */,
 			);
@@ -263,7 +266,6 @@
 		240C76382953CF8900C25880 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				24A2DAF9296DF69100C79807 /* User  */,
 				24F5BE65297093AC004BC04F /* Discover */,
 				241EE925296021EA005F41D9 /* Shopping List */,
 				24F6A02D29544F600032D4B3 /* Merchandise Search */,
@@ -299,6 +301,14 @@
 			path = "Shopping List";
 			sourceTree = "<group>";
 		};
+		243BBBFE297119E50098872A /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				243BBBFF29711A010098872A /* ViewController.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		24A2DAE2296DE0D600C79807 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,13 +336,6 @@
 				24A2DAEB296DE5B700C79807 /* HangTightProgressView.swift */,
 			);
 			path = "Progress Views";
-			sourceTree = "<group>";
-		};
-		24A2DAF9296DF69100C79807 /* User  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "User ";
 			sourceTree = "<group>";
 		};
 		24A2DAFC296DFB8400C79807 /* Search Results */ = {
@@ -406,13 +409,6 @@
 			name = "My Store";
 			sourceTree = "<group>";
 		};
-		24F5BE6D29709E9E004BC04F /* Recently Viewed */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Recently Viewed";
-			sourceTree = "<group>";
-		};
 		24F6A02D29544F600032D4B3 /* Merchandise Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,7 +432,6 @@
 		24F6A03929557FC60032D4B3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				24F5BE6D29709E9E004BC04F /* Recently Viewed */,
 				24C642FF296A3B7600BA5644 /* Search */,
 				24C642FE296A3B5C00BA5644 /* Shopping List */,
 			);
@@ -628,6 +623,7 @@
 				240C763A2953CF9900C25880 /* SelectedMerchandiseView.swift in Sources */,
 				240C761D2952A52100C25880 /* Tab.swift in Sources */,
 				240C76312952DA5600C25880 /* URL+EXT.swift in Sources */,
+				243BBC0029711A010098872A /* ViewController.swift in Sources */,
 				240C763D2953D27E00C25880 /* Merchandise.swift in Sources */,
 				240C761B2952A52100C25880 /* TargeyApp.swift in Sources */,
 				24C4286F295A56F6006CDE35 /* SelectedStoreInStockView.swift in Sources */,
