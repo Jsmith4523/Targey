@@ -25,7 +25,6 @@ struct DiscoverView: View {
             .navigationTitle("Discover")
             .accentColor(.targetRed)
         }
-        .setupNavigation()
     }
 }
 
