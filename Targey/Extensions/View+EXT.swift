@@ -11,7 +11,6 @@ import SwiftUI
 extension View {
     
     func ratingView(rating: Double, reviewCount: Int) -> some View {
-        
         let rating = Int(rating)
         
         return HStack(spacing: 5) {
@@ -24,7 +23,7 @@ extension View {
             }
         }
     }
-    
+
     func storeGlyph() -> some View {
         Image("store")
             .resizable()

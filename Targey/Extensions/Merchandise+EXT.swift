@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension product {
     
@@ -135,5 +136,18 @@ extension primary {
         str = productSymbol+"\(sale)"
         
         return str
+    }
+    
+    var productPriceLabel: some View {
+        HStack {
+            if self.activeSale {
+                Text(self.productRegularPrice)
+                    .strikethrough(self.activeSale, color: .red)
+                Text(self.productSalePrice)
+                    .foregroundColor(.red)
+            } else {
+                Text(self.productRegularPrice)
+            }
+        }
     }
 }

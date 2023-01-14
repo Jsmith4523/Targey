@@ -94,7 +94,7 @@ struct SelectedMerchandiseView: View {
             
         }
         .sheet(isPresented: $isShowingStoreStockView) {
-            StoresInStockView(merchandise: merchandise)
+            MerchandiseStockView(merchandise: merchandise)
         }
         .onAppear {
             searchModel.locationManager = locationModel
@@ -120,16 +120,8 @@ fileprivate struct MerchandiseDetailsView: View {
                 .font(.system(size: 23).weight(.bold))
                 .lineLimit(2)
             ratingView(rating: product.productRating, reviewCount: product.productRatingTotal)
-            if offer.primary.activeSale {
-                HStack {
-                    Text(offer.primary.productRegularPrice)
-                        .strikethrough(offer.primary.activeSale, color: .red)
-                    Text(offer.primary.productSalePrice)
-                        .foregroundColor(.red)
-                }
-            } else {
-                Text(offer.primary.productRegularPrice)
-            }
+            offer.primary.productPriceLabel
+                .font(.system(size: 18.5))
             Spacer()
                 .frame(height: 10)
             ForEach(product.productBullets, id: \.self) {

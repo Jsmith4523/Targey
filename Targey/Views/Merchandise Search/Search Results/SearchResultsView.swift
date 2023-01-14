@@ -62,16 +62,8 @@ struct MerchandiseItemCellView: View {
                     .font(.system(size: 17).weight(.semibold))
                     .multilineTextAlignment(.leading)
                     .lineLimit(3)
-                HStack {
-                    if offer.primary.activeSale {
-                        Text(offer.primary.productRegularPrice)
-                            .strikethrough(offer.primary.activeSale, color: .red)
-                        Text(offer.primary.productSalePrice)
-                            .foregroundColor(.red)
-                    } else {
-                        Text(offer.primary.productRegularPrice)
-                    }
-                }
+                offer.primary.productPriceLabel
+                    .font(.system(size: 16.5))
             }
             Spacer()
         }

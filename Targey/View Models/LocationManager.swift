@@ -40,13 +40,7 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
         
         manager.delegate = self
         self.fetchFavoriteSavedStore()
-//
-//        if let favoriteStore = UserDefaults.standard.data(forKey: "favoriteStore") {
-//            if let decodedStore = try? JSONDecoder().decode(NearbyStore.self, from: favoriteStore) {
-//                print(decodedStore)
-//                self.favoriteStore = decodedStore
-//            }
-//        }
+
     }
     
     func setDelegate(userZipCode: UserZipCodeDelegate) {
@@ -142,23 +136,14 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
     }
     
     func removeFavoriteStore() {
-        let encoder = JSONEncoder()
-        UserDefaults.standard.set(Data(), forKey: "favoriteStore")
+        UserDefaults.standard.removeObject(forKey: "favoriteStore")
         fetchFavoriteSavedStore()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
-        print("Location no longer deferred")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         getUserZipcode { zipcode in
             self.userZipCode?.didRecieveUserZipCode(zipcode)
         }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("Did start region monitor")
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

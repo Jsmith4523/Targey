@@ -26,7 +26,6 @@ struct DiscoverContentSection<Content: View>: View {
             } header: {
                 Text(header)
                     .font(.system(size: 18).bold())
-                    .padding(.horizontal)
             }
         }
     }

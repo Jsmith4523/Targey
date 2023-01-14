@@ -18,7 +18,7 @@ class StoreStockManager: RedCircle {
     }
     
     func checkStock(tcin: String, zipcode: String, withCompletion: @escaping (Result<[Store], StoreStockError>) -> Void) {
-        guard let url = URL.storeStockURL(tcin: tcin, zipcode: zipcode) else {
+        guard let url = URL.fetchStock(tcin: tcin, zipcode: zipcode) else {
             withCompletion(.failure(.error("Bad url")))
             return
         }

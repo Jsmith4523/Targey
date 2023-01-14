@@ -66,6 +66,15 @@ extension Image {
             .cornerRadius(5)
     }
     
+    ///Use within ScannedProductView on a products main image
+    func scannedProductImageStyle() -> some View {
+        return self
+            .resizable()
+            .scaledToFill()
+            .frame(width: 65, height: 65)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+    
     func shoppingListSelectionOptionButtonStyle() -> some View {
         return self
             .resizable()

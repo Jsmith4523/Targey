@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StoresInStockView: View {
+struct MerchandiseStockView: View {
     
     @State private var alertOfError = false
     @State private var erroReason = "There was an error"
@@ -29,11 +29,11 @@ struct StoresInStockView: View {
         NavigationView {
             ScrollView {
                 ForEach(stores.filter({$0.inStock == true}), id: \.store_id){ store in
-                    FetchedStoreView(store: store, searchModel: searchModel)
+                    FetchedStoreCellView(store: store, searchModel: searchModel)
                     Divider()
                 }
                 ForEach(stores.filter({$0.inStock == false}), id: \.store_id){ store in
-                    FetchedStoreView(store: store, searchModel: searchModel)
+                    FetchedStoreCellView(store: store, searchModel: searchModel)
                     Divider()
                 }
             }
@@ -65,7 +65,15 @@ struct StoresInStockView: View {
     }
     
     private func fetchStoresWithProduct() {
-        searchModel.locateStoresWithStock(tcin: product.productTcin) { response in
+        var reference = ""
+        
+        if product.productTcin.isEmpty {
+            reference = product.productDcip
+        } else {
+            reference = product.productTcin
+        }
+        
+        searchModel.locateStoresWithStock(tcin: reference) { response in
             switch response {
             case .success(let stores):
                 DispatchQueue.main.async {
@@ -81,7 +89,7 @@ struct StoresInStockView: View {
     }
 }
 
-fileprivate struct FetchedStoreView: View {
+fileprivate struct FetchedStoreCellView: View {
     
     let store: Store
     
@@ -113,9 +121,9 @@ fileprivate struct FetchedStoreView: View {
                 Text(store.storeName)
                     .font(.system(size: 17.5).weight(.semibold))
                 stockText
-                    .font(.system(size: 15))
+                    .font(.system(size: 16.25))
                 Text("\(store.storeDistance) miles away")
-                    .font(.system(size: 13.5))
+                    .font(.system(size: 14.5))
             }
             Spacer()
             NavigationLink {
@@ -135,6 +143,6 @@ fileprivate struct FetchedStoreView: View {
 
 struct StoresInStockView_Previews: PreviewProvider {
     static var previews: some View {
-        StoresInStockView(merchandise: .init(position: 1, product: .init(title: "", link: "", tcin: "", dpci: "", feature_bullets: [""], rating: nil, rating_total: 0, main_image: "", images: [""]), offers: .init(primary: .init(price: 0, symbol: "", regular_price: nil))))
+        MerchandiseStockView(merchandise: .init(position: 1, product: .init(title: "", link: "", tcin: "", dpci: "", feature_bullets: [""], rating: nil, rating_total: 0, main_image: "", images: [""]), offers: .init(primary: .init(price: 0, symbol: "", regular_price: nil))))
     }
 }

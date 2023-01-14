@@ -19,7 +19,7 @@ extension URL {
         return url
     }
     
-    static func storeStockURL(tcin: String, zipcode: String) -> URL? {
+    static func fetchStock(tcin: String, zipcode: String) -> URL? {
         guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=EEE1A29603D0424CA2AE29CBEFE2EF64&type=store_stock&store_stock_zipcode=\(zipcode)&tcin=\(tcin)") else {
             return nil
         }
