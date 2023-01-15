@@ -27,10 +27,7 @@ struct MyStoreCard: View {
                 }
             }
             .frame(height: 150)
-            .disabled(false)
-            .onTapGesture {
-                navigateToStoreView.toggle()
-            }
+            .disabled(true)
             HStack {
                 Image.homeStore
                     .resizable()
@@ -62,6 +59,9 @@ struct MyStoreCard: View {
         .overlay {
             RoundedRectangle(cornerRadius: 18)
                 .stroke(.gray.opacity(0.2))
+        }
+        .onTapGesture {
+            navigateToStoreView.toggle()
         }
         .padding()
         .onChange(of: favoriteStore) {

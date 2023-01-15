@@ -90,8 +90,10 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
     }
     
     func didRecieveBarcodeObjectString(_ barcode: String) {
+        self.isShowingScannedProductView.toggle()
         self.scannedUpc = barcode
         self.isFindingScannedProduct = true
+        
         searchManager.fetchProductByTcin(tcin: barcode) { status in
             switch status {
             case .success(let scannedProduct):
@@ -112,7 +114,6 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
                                             scannedProduct.buybox_winner.was_price?.value
                                          )))
                     self.isFindingScannedProduct = false
-                    self.isShowingScannedProductView.toggle()
                 }
             case .failure(let reason):
                 DispatchQueue.main.async {

@@ -154,7 +154,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AV
                 return
             }
             
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
             generator.impactOccurred()
            
             session.stopRunning()
@@ -172,9 +172,11 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AV
     }
     
     func relaunchSesson() {
-        DispatchQueue.global(qos: .background).async {
-            self.session.startRunning()
+        DispatchQueue.main.async {
             self.stopScanningForObject = false
+        }
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now()) {
+            self.session.startRunning()
         }
     }
 
@@ -190,11 +192,13 @@ struct CameraSession: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: UIScreen.main.bounds)
         
-        cameraModel.previewLayer = AVCaptureVideoPreviewLayer(session: cameraModel.session)
-        cameraModel.previewLayer.frame = view.frame
-        cameraModel.previewLayer.videoGravity = .resizeAspectFill
-        
-        view.layer.addSublayer(cameraModel.previewLayer)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            cameraModel.previewLayer = AVCaptureVideoPreviewLayer(session: cameraModel.session)
+            cameraModel.previewLayer.frame = view.frame
+            cameraModel.previewLayer.videoGravity = .resizeAspectFill
+            
+            view.layer.addSublayer(cameraModel.previewLayer)
+        }
         
         return view
     }

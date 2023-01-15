@@ -13,7 +13,7 @@ struct ScannedProductView: View {
     
     @Binding var isShowingSelectedProductView: Bool
     
-    @ObservedObject var scannerModel: CameraModel
+    @ObservedObject var cameraModel: CameraModel
     @ObservedObject var searchModel: SearchViewModel
     
     @Environment(\.dismiss) var dismiss
@@ -24,21 +24,33 @@ struct ScannedProductView: View {
     
     var body: some View {
         NavigationView {
-            if let merchandise = merchandise {
-                ScannedProductInformationView(method: self.navigateToProductPage, merchandise: merchandise, searchModel: searchModel)
+            if searchModel.isFindingScannedProduct {
+                DogProgessView()
             } else {
-                ScannedProductNotFoundView()
+                if let merchandise = merchandise {
+                    MerchandiseScannedProductView(method: self.navigateToProductPage, merchandise: merchandise, searchModel: searchModel)
+                } else {
+                    ScannedProductNotFoundView()
+                }
             }
         }
         .onDisappear {
             if !shouldNotStartCameraSession {
-                scannerModel.relaunchSesson()
-                scannerModel.stopScanningForObject.toggle()
+                cameraModel.relaunchSesson()
+                cameraModel.stopScanningForObject.toggle()
             }
         }
         .onAppear {
-            scannerModel.stopScanningForObject.toggle()
+            cameraModel.stopScanningForObject.toggle()
         }
+        .alert("Error", isPresented: $searchModel.alertOfFailureToFindItem, actions: {
+            Button("Ok") {
+                dismiss()
+                cameraModel.relaunchSesson()
+            }
+        }, message: {
+            Text("That product could not be found")
+        })
     }
     
     func navigateToProductPage() {
@@ -49,7 +61,7 @@ struct ScannedProductView: View {
     }
 }
 
-fileprivate struct ScannedProductInformationView: View {
+fileprivate struct MerchandiseScannedProductView: View {
     
     var method: () -> Void
         
@@ -59,62 +71,7 @@ fileprivate struct ScannedProductInformationView: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 15) {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Label {
-                                Text("We found it")
-                                    .font(.system(size: 17).bold())
-                            } icon: {
-                                Image(systemName: "checkmark")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(.green)
-                            }
-                            Spacer()
-                        }
-                        HStack(alignment: .top) {
-                            AsyncImage(url: merchandise.product.mainProductImageURL!) { img in
-                                img
-                                    .scannedProductImageStyle()
-                            } placeholder: {
-                                Image.placeholderProductImage
-                                    .scannedProductImageStyle()
-                            }
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(merchandise.product.title)
-                                    .font(.system(size: 15).weight(.medium))
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(2)
-                                ratingView(rating: merchandise.product.productRating, reviewCount: 0)
-                                merchandise.offers.primary.productPriceLabel
-                                    .font(.system(size: 15))
-                            }
-                        }
-                        .frame(height: 85)
-                    }
-                    DiscoverContentSection(header: "Details") {
-                        ForEach(merchandise.product.productBullets, id: \.self) {
-                            Text($0)
-                                .multilineTextAlignment(.leading)
-                                .font(.system(size: 14))
-                        }
-                    }
-                    DiscoverContentSection(header: "Additional Information") {
-                        VStack(alignment: .leading) {
-                            Text("DPCI: \(merchandise.product.productDcip)")
-                            Text("TCIN: \(merchandise.product.productTcin)")
-                            Text("UPC: \(searchModel.scannedUpc)")
-                        }
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                    }
-                }
-                .padding()
-                .navigationBarTitleDisplayMode(.inline)
-            }
+            ScannedProductInformationView(merchandise: merchandise, upc: searchModel.scannedUpc)
             Spacer()
             Divider()
             Button {
@@ -126,6 +83,20 @@ fileprivate struct ScannedProductInformationView: View {
                     .background(.red)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .foregroundColor(.white)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                HStack {
+                    Image(systemName: "checkmark")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 15, height: 15)
+                        .foregroundColor(.green)
+                    Text("We found it!")
+                        .font(.system(size: 17).bold())
+                        .foregroundColor(.reversed)
+                }
             }
         }
     }
@@ -147,7 +118,7 @@ fileprivate struct ScannedProductNotFoundView: View {
 struct ScannedObjectView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ScannedProductView(isShowingSelectedProductView: .constant(false), scannerModel: CameraModel(), searchModel: SearchViewModel())
+            ScannedProductView(isShowingSelectedProductView: .constant(false), cameraModel: CameraModel(), searchModel: SearchViewModel())
                 .preferredColorScheme(.dark)
         }
     }

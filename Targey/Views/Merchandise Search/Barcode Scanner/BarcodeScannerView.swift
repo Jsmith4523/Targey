@@ -20,63 +20,15 @@ struct BarcodeScannerView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                ZStack(alignment: .bottom) {
-                    BarcodeScannerOutputView(cameraModel: cameraModel)
-                    LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
-                        .frame(height: 350)
-                }
-                .ignoresSafeArea()
-                VStack(spacing: 10) {
-                    HStack {
-                        Spacer()
-                        if cameraModel.deviceHasTorch {
-                            Button {
-                                cameraModel.toggleTorch()
-                            } label: {
-                                Image(systemName: cameraModel.torchIsOn ? "bolt.fill" : "bolt")
-                                    .barcodeScannerTopButtonsStyle()
-                            }
-                        }
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                                .barcodeScannerTopButtonsStyle()
-                        }
-                    }
-                    Spacer()
-                    Text(searchModel.isFindingScannedProduct ? "Finding item... This may take a few" : "Place a barcode within the rectangle")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20).weight(.semibold))
-                    Text("Most items may not be recognize.")
-                        .font(.system(size: 15))
-                        .foregroundColor(.white)
-                    if !(searchModel.scannedMerchandise == nil) {
-                        NavigationLink(isActive: $isShowingSelectedMerchandiseView) {
-                            SelectedMerchandiseView(merchandise: searchModel.scannedMerchandise!, searchModel: searchModel)
-                                .onDisappear {
-                                    colorScheme = .dark
-                                    cameraModel.relaunchSesson()
-                                }
-                        } label: {}
-                    }
-                }
-                .multilineTextAlignment(.center)
-                .padding()
+            ZStack(alignment: .bottom) {
+                BarcodeScannerOutputView(cameraModel: cameraModel)
+                BarcodeScannerBottomInstructionsView(cameraModel: cameraModel)
             }
         }
         .accentColor(.targetRed)
-        .alert("Error", isPresented: $searchModel.alertOfFailureToFindItem, actions: {
-            Button("Ok") {
-                cameraModel.relaunchSesson()
-            }
-        }, message: {
-            Text("That product could not be found")
-        })
         .preferredColorScheme(colorScheme)
-        .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium(), .large()], showsIndicator: true, cornerRadius: 30) {
-            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, scannerModel: cameraModel, searchModel: searchModel)
+        .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium()], showsIndicator: true, cornerRadius: 15) {
+            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, cameraModel: cameraModel, searchModel: searchModel)
         }
             
         .onAppear {
@@ -89,6 +41,23 @@ struct BarcodeScannerView: View {
         .onChange(of: isShowingSelectedMerchandiseView) { _ in
             colorScheme = .light
         }
+    }
+}
+
+struct BarcodeScannerBottomInstructionsView: View {
+    
+    @ObservedObject var cameraModel: CameraModel
+    @ObservedObject var searchModel: SearchViewModel
+    
+    var body: some View {
+        VStack {
+            Text(cameraModel)
+                .font(.system(size: 20).bold())
+            
+        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .padding()
     }
 }
 
