@@ -22,15 +22,14 @@ struct BarcodeScannerView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 BarcodeScannerOutputView(cameraModel: cameraModel)
-                BarcodeScannerBottomInstructionsView(cameraModel: cameraModel)
+                BarcodeScannerBottomInstructionsView(cameraModel: cameraModel, searchModel: searchModel)
             }
         }
         .accentColor(.targetRed)
         .preferredColorScheme(colorScheme)
         .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium()], showsIndicator: true, cornerRadius: 15) {
-            ScannedProductView( isShowingSelectedProductView: $isShowingSelectedMerchandiseView, cameraModel: cameraModel, searchModel: searchModel)
+            ScannedProductView(isShowingSelectedProductView: $isShowingSelectedMerchandiseView, cameraModel: cameraModel, searchModel: searchModel)
         }
-            
         .onAppear {
            cameraModel.setDelegate(barcodeDelegate: searchModel)
            cameraModel.beginSetup()
@@ -51,12 +50,13 @@ struct BarcodeScannerBottomInstructionsView: View {
     
     var body: some View {
         VStack {
-            Text(cameraModel)
+            Text(searchModel.isSearching ? "Searching..." : "Positon barcode within frame")
                 .font(.system(size: 20).bold())
             
         }
         .padding()
         .background(.ultraThinMaterial)
+        .cornerRadius(30)
         .padding()
     }
 }
