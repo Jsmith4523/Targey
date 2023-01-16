@@ -84,18 +84,16 @@ fileprivate struct ScannerButton: View {
 
 fileprivate struct SearchInstruction: View {
     var body: some View {
-        VStack(alignment: .center) {
-            Spacer()
-            Image.cartwheel
-                .cartwheelSymbolStyle()
-            Text("Begin searching for everyday products!")
-                .font(.system(size: 16))
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-            Spacer()
+        VStack {
+            Image.
         }
-        .padding()
     }
 }
 
  
+
+struct Previews_Search_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchInstruction()
+    }
+}
