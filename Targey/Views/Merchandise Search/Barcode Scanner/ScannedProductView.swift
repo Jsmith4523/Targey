@@ -55,6 +55,7 @@ struct ScannedProductView: View {
     
     func navigateToProductPage() {
         dismiss()
+        shouldNotStartCameraSession = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             isShowingSelectedProductView.toggle()
         }

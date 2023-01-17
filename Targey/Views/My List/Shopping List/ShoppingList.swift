@@ -260,10 +260,10 @@ fileprivate struct CollectedShoppingItemsButton: View {
                 } label: {
                     Image(systemName: "text.badge.checkmark")
                         .largeButtonStyle(backgroundColor: collectedItems.isEmpty ? .gray : .green)
-                        .disabled(collectedItems.isEmpty)
                 }
             }
             .padding()
+            .disabled(collectedItems.isEmpty)
         }
     }
 }

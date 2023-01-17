@@ -23,18 +23,30 @@ struct BarcodeScannerView: View {
             ZStack(alignment: .bottom) {
                 BarcodeScannerOutputView(cameraModel: cameraModel)
                 BarcodeScannerBottomInstructionsView(cameraModel: cameraModel, searchModel: searchModel)
+                if let merchandise = searchModel.scannedMerchandise {
+                    NavigationLink(isActive: $isShowingSelectedMerchandiseView) {
+                        SelectedMerchandiseView(merchandise: merchandise, searchModel: searchModel)
+                            .onAppear {
+                                colorScheme = .light
+                            }
+                            .onDisappear {
+                                cameraModel.relaunchSesson()
+                                colorScheme = .dark
+                            }
+                    } label: {}
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     if cameraModel.deviceHasTorch {
                         Button {
-                            
+                            cameraModel.toggleTorch()
                         } label: {
-                            Image(systemName: cameraModel.torchIsOn ? "flashlight.on.fill" : "flashlight.off.fill")
+                            Image(systemName: "flashlight.on.fill")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 22, height: 22)
-                                .foregroundColor(cameraModel.torchIsOn ? .red : .white)
+                                .foregroundColor(.white)
                                 .shadow(radius: 3)
                         }
                     }
@@ -65,9 +77,6 @@ struct BarcodeScannerView: View {
         .onDisappear {
             cameraModel.session.stopRunning()
         }
-        .onChange(of: isShowingSelectedMerchandiseView) { _ in
-            colorScheme = .light
-        }
     }
 }
 
@@ -78,13 +87,11 @@ struct BarcodeScannerBottomInstructionsView: View {
     
     var body: some View {
         VStack {
-            Text(searchModel.isSearching ? "Searching..." : "Positon barcode within frame")
+            Text("Positon barcode within frame")
                 .font(.system(size: 20).bold())
-            
+                .foregroundColor(.white)
+                .shadow(radius: 7)
         }
-        .padding()
-        .background(.ultraThinMaterial)
-        .cornerRadius(30)
         .padding()
     }
 }

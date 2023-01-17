@@ -311,17 +311,9 @@
 		241922712977007300FE2CB3 /* My List */ = {
 			isa = PBXGroup;
 			children = (
-				241922722977007B00FE2CB3 /* Favorites */,
 				241EE925296021EA005F41D9 /* Shopping List */,
 			);
 			path = "My List";
-			sourceTree = "<group>";
-		};
-		241922722977007B00FE2CB3 /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Favorites;
 			sourceTree = "<group>";
 		};
 		241EE925296021EA005F41D9 /* Shopping List */ = {
