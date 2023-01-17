@@ -27,7 +27,11 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
     
     @Published var merchandises = [Merchandise]()
     @Published var stores = [Store]()
-    @Published var scannedMerchandise: Merchandise?
+    @Published var scannedMerchandise: Merchandise? {
+        didSet {
+            print("Was set a scanned product")
+        }
+    }
         
     var locationManager: LocationServicesManager?
     private let searchManager     = SearchManager()

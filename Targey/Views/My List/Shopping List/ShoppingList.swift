@@ -66,6 +66,8 @@ fileprivate struct ShoppingListItemsView: View {
                     ShoppingListItemCellView(collectedItems: $collectedItems, isCurrentlyEditing: $isCurrentlyEditing, item: item, shopLM: shopLM)
                     Divider()
                 }
+                Spacer()
+                    .frame(height: 70)
             }
         }
         .toolbar {
@@ -258,7 +260,7 @@ fileprivate struct CollectedShoppingItemsButton: View {
                         isEditing = success
                     }
                 } label: {
-                    Image(systemName: "text.badge.checkmark")
+                    Image(systemName: "cart.fill.badge.minus")
                         .largeButtonStyle(backgroundColor: collectedItems.isEmpty ? .gray : .green)
                 }
             }

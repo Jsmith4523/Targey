@@ -16,6 +16,7 @@ struct ShoppingListBarcodeScannerView: View {
     @ObservedObject var shopLM: ShoppingListViewModel
     
     @Environment (\.dismiss) var dismiss
+    @Environment (\.colorScheme) var deviceColorScheme
     
     var body: some View {
         ZStack {
@@ -37,19 +38,23 @@ struct ShoppingListBarcodeScannerView: View {
                 Spacer()
             }
         }
-        .autocorrectionDisabled(true)
-        .alert("Product Not Found", isPresented: $searchModel.alertOfFailureToFindItem, actions: {
-            Button("Yes"){ isShowingManualEntryView.toggle() }
-            Button("Cancel"){}
-        }, message: {
-            Text("We couldn't find that product within the Target Database! Would you like to manually enter the product?")
-        })
+        .statusBar(hidden: true)
         .sheet(isPresented: $isShowingManualEntryView) {
             ShoppingListManualEnterView(shopLM: shopLM, scannedUpc: searchModel.scannedUpc)
+        }
+        .customSheetView(isPresented: $searchModel.isShowingScannedProductView, detents: [.medium()], showsIndicator: true, cornerRadius: 15) {
+            ShoppingListSearchedItemView(merchandise: $searchModel.scannedMerchandise,searchModel: searchModel, shoppingLM: shopLM)
+                .onDisappear {
+                    cameraModel.relaunchSesson()
+                }
         }
         .onAppear {
             cameraModel.setDelegate(barcodeDelegate: searchModel)
             cameraModel.beginSetup()
+        }
+        .onDisappear {
+//            print(deviceColorScheme)
+//            colorScheme = deviceColorScheme
         }
     }
 }

@@ -57,11 +57,11 @@ struct ShoppingListMerchandiseSearchResults: View {
     
     @State private var selectedMerchandise: Merchandise? {
         didSet {
-            isShowingSelectedMerchandiseQuantityView.toggle()
+            isShowingShoppingListSearchedItemView.toggle()
         }
     }
     
-    @State private var isShowingSelectedMerchandiseQuantityView = false
+    @State private var isShowingShoppingListSearchedItemView = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -75,8 +75,8 @@ struct ShoppingListMerchandiseSearchResults: View {
                 }
             }
         }
-        .customSheetView(isPresented: $isShowingSelectedMerchandiseQuantityView, detents: [.medium()], cornerRadius: 15) {
-            ShoppingListScannedItemView(merchandise: selectedMerchandise, searchModel: searchModel, shoppingLM: shopLM)
+        .customSheetView(isPresented: $isShowingShoppingListSearchedItemView, detents: [.medium()], cornerRadius: 15) {
+            ShoppingListSearchedItemView( merchandise: $selectedMerchandise, searchModel: searchModel, shoppingLM: shopLM)
         }
     }
 }
