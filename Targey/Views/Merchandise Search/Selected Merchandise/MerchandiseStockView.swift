@@ -143,6 +143,6 @@ fileprivate struct FetchedStoreCellView: View {
 
 struct StoresInStockView_Previews: PreviewProvider {
     static var previews: some View {
-        MerchandiseStockView(merchandise: .init(position: 1, product: .init(title: "", link: "", tcin: "", dpci: "", feature_bullets: [""], rating: nil, rating_total: 0, main_image: "", images: [""]), offers: .init(primary: .init(price: 0, symbol: "", regular_price: nil))))
+        MerchandiseStockView(merchandise: .init(position: 1, product: .init(title: "", link: "", tcin: "", dpci: "", upc: "", feature_bullets: [""], rating: nil, rating_total: 0, main_image: "", images: [""]), offers: .init(primary: .init(price: 0, symbol: "", regular_price: nil))))
     }
 }

@@ -24,7 +24,7 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     @Published var isShowingSearchView = false
     @Published var isShowingScannerView = false
     @Published var isShowingManualView = false
-    
+        
     private let manager = ShoppingListManager.shared
     
     func didSelectMerchandise(_ merchandise: Merchandise) {
@@ -35,22 +35,16 @@ final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
     
     func addItemToShoppingList(_ merchandise: Merchandise, quantity: Int = 1, completion: @escaping (Bool) -> Void) {
         let feedback = UINotificationFeedbackGenerator()
-        var productImage = UIImage()
-                
+        
         let shoppingItem      = ShoppingItem(context: manager.container.viewContext)
         
-        merchandise.product.productMainImasgeData { data in
-            guard let data, let image = UIImage(data: data) else {
-                return
-            }
-            productImage = image
-        }
-        
         shoppingItem.name     = merchandise.product.title
-        shoppingItem.imgData  = productImage.pngData()
+        shoppingItem.imgData  = merchandise.product.mainProductImageURL ?? nil
         shoppingItem.isOnSale = merchandise.offers.primary.activeSale
-        shoppingItem.price    = merchandise.offers.primary.productRegularPrice
+        shoppingItem.price    = merchandise.offers.primary.productPriceValue
         shoppingItem.quantity = Int64(quantity)
+        shoppingItem.dpci     = merchandise.product.productDcip
+        shoppingItem.tcin     = merchandise.product.productTcin
         
         manager.save { result in
             switch result {

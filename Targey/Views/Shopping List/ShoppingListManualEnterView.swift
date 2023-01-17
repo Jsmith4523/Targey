@@ -74,7 +74,8 @@ struct ShoppingListManualEnterView: View {
     }
     
     private func prepareMerchandise() {
-        let merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: nil, symbol: .userCurrencySymbol, regular_price: Double(price))))
+        var merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, upc: "", feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: nil, symbol: .userCurrencySymbol, regular_price: Double(price))))
+        merchandise.product.upc = scannedUpc
         shopLM.addItemToShoppingList(merchandise, quantity: quantity) { didSave  in
             if didSave {
                 dismiss()

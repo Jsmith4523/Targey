@@ -43,6 +43,17 @@ extension product {
         return bullets
     }
     
+    var productBio: String {
+        var bio = ""
+        
+        if let bullets = feature_bullets {
+            bullets.forEach {
+                bio += $0
+            }
+        }
+        return bio
+    }
+    
     var productRating: Double {
         guard let rating = rating else {
             return 0
@@ -136,6 +147,15 @@ extension primary {
         str = productSymbol+"\(sale)"
         
         return str
+    }
+    
+    ///Use when assigning the opnect to CoreData
+    var productPriceValue: Double {
+        if let price {
+            return price
+        } else {
+            return 0
+        }
     }
     
     var productPriceLabel: some View {

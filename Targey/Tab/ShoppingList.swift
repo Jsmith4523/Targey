@@ -26,7 +26,6 @@ struct ShoppingListView: View {
                 AddShoppingItemButton(shopLM: shopLM)
             }
             .navigationTitle("Shopping List")
-            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $shopLM.isShowingSearchView) {
                 ShoppingListMerchandiseSearchView(shopLM: shopLM)
             }
@@ -51,55 +50,80 @@ fileprivate struct ShoppingListItemsView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                ForEach(shopLM.shoppingItems) { item in
+                ForEach(shopLM.shoppingItems.sorted(by: {$0.name! > $1.name!})) { item in
                     ShoppingListItemCellView(item: item, shopLM: shopLM)
                     Divider()
                 }
             }
-        }
-        .toolbar {
-            Button("Remove all") {
-                shopLM.removeAllItemsFromShoppingList()
-            }
-            .foregroundColor(.targetRed)
         }
     }
 }
 
 struct ShoppingListItemCellView: View {
     
+    @State private var isShowingSelectedItemInformationView = false
+        
     let item: ShoppingItem
     
     @ObservedObject var shopLM: ShoppingListViewModel
     
-    var productImage: Image {
-        guard let data = item.imgData, let uiImage = UIImage(data: data) else {
-            return .placeholderProductImage
-        }
-        print(data)
-        return Image(uiImage: uiImage)
-    }
-    
     var body: some View  {
         HStack {
-            productImage
-                .resizable()
-                .scaledToFit()
-                .frame(width: 65, height: 65)
-            VStack(alignment: .leading) {
-                Text(item.name ?? "Item")
-                    .font(.system(size: 17).weight(.semibold))
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(3)
-                Text(item.price ?? "")
-                    .font(.system(size: 15))
-                Text("x\(item.quantity)")
-                    .font(.system(size: 15))
-                    .foregroundColor(.gray)
+            HStack(alignment: .top) {
+                if let url = item.imgData {
+                    AsyncImage(url: url) { img in
+                        img.shoppingListProductImageStyle()
+                    } placeholder: {
+                        Image.placeholderProductImage.shoppingListProductImageStyle()
+                    }
+                } else {
+                    Image.placeholderProductImage.shoppingListProductImageStyle()
+                }
+                VStack(alignment: .leading) {
+                    Group {
+                        Text(item.name ?? "Product")
+                            .font(.system(size: 17).bold())
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(3)
+                        Text("\(item.price)")
+                            .font(.system(size: 15))
+                            .multilineTextAlignment(.leading)
+                    }
+                    .foregroundColor(.reversed)
+                    Text("x\(item.quantity)")
+                        .font(.system(size: 14))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.gray)
+                }
+                Spacer()
+            
             }
-            Spacer()
+            
+            Menu {
+                Button {
+                    isShowingSelectedItemInformationView.toggle()
+                } label: {
+                   Label("Info", systemImage: "info.circle")
+                }
+                Button {
+                    
+                } label: {
+                    Label("Update Quantity", systemImage: "plus")
+                }
+                Button(role: .destructive) {
+                    shopLM.removeItemFromShoppingList(item)
+                } label: {
+                    Label("Remove", systemImage: "trash")
+                }
+            } label: {
+                Image(systemName: "ellipsis")
+            }
+            .padding()
         }
         .padding()
+        .customSheetView(isPresented: $isShowingSelectedItemInformationView, detents: [.medium()], showsIndicator: true, cornerRadius: 35) {
+            SelectedItemInShoppingList(item: item)
+        }
     }
 }
 
@@ -135,11 +159,5 @@ fileprivate struct AddShoppingItemButton: View {
             }
             .padding()
         }
-    }
-}
-
-struct ShoppingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ShoppingListView()
     }
 }

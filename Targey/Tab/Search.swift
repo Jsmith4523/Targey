@@ -86,16 +86,25 @@ fileprivate struct SearchInstruction: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
-            Image.cartwheel
-                .cartwheelSymbolStyle()
-            Text("Begin searching for everyday products!")
-                .font(.system(size: 16))
-                .foregroundColor(.gray)
+            Image.dogPhone
+                .resizable()
+                .scaledToFit()
+                .frame(width: 75, height: 75)
+            Text("Recents will appear here")
+                .font(.system(size: 20).bold())
+            Spacer()
+                .frame(height: 5)
+            Text("As you search, products you've selected will appear as 'recent'")
                 .multilineTextAlignment(.center)
+                .padding()
             Spacer()
         }
         .padding()
     }
 }
 
- 
+struct Previews_Search_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchInstruction()
+    }
+}

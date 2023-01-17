@@ -30,11 +30,3 @@ struct DiscoverContentSection<Content: View>: View {
         }
     }
 }
-
-struct DiscoverContentSection_Previews: PreviewProvider {
-    static var previews: some View {
-        DiscoverContentSection(header: "Promotions") {
-            MyStoreNotSelectView(locationM: LocationServicesManager())
-        }
-    }
-}

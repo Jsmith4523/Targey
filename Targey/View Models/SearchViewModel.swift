@@ -103,6 +103,7 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
                                   link: scannedProduct.link,
                                   tcin: scannedProduct.dpci,
                                   dpci: scannedProduct.dpci,
+                                  upc: scannedProduct.productUpc,
                                   feature_bullets: scannedProduct.productFeatureBullets,
                                   rating: scannedProduct.rating,
                                   rating_total: nil,

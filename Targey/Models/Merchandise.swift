@@ -81,7 +81,7 @@ struct MerchandiseResponse: Decodable {
 struct Merchandise: Decodable, Comparable {
 
     let position: Int
-    let product: product
+    var product: product
     let offers: offers
     
     static func < (lhs: Merchandise, rhs: Merchandise) -> Bool {
@@ -102,6 +102,7 @@ struct product: Decodable {
     let link: String?
     let tcin: String?
     let dpci: String?
+    var upc: String?
     let feature_bullets: [String]?
     let rating: Double?
     let rating_total: Int?

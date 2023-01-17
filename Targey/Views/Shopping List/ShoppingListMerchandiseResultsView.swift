@@ -46,6 +46,7 @@ struct ShoppingListMerchandiseSearchView: View {
             }
         }
         .accentColor(.targetRed)
+        .interactiveDismissDisabled()
     }
 }
 
@@ -54,14 +55,28 @@ struct ShoppingListMerchandiseSearchResults: View {
     @ObservedObject var searchModel: SearchViewModel
     @ObservedObject var shopLM: ShoppingListViewModel
     
+    @State private var selectedMerchandise: Merchandise? {
+        didSet {
+            isShowingSelectedMerchandiseQuantityView.toggle()
+        }
+    }
+    
+    @State private var isShowingSelectedMerchandiseQuantityView = false
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 ForEach(searchModel.merchandises, id: \.position) { merchandise in
                     ShoppingListMerchandiseItemCellView(merchandise: merchandise, shopLM: shopLM)
+                        .onTapGesture {
+                            selectedMerchandise = merchandise
+                        }
                     Divider()
                 }
             }
+        }
+        .customSheetView(isPresented: $isShowingSelectedMerchandiseQuantityView, detents: [.medium()], cornerRadius: 15) {
+            ShoppingListScannedItemView(merchandise: selectedMerchandise, searchModel: searchModel, shoppingLM: shopLM)
         }
     }
 }
@@ -83,9 +98,9 @@ fileprivate struct ShoppingListMerchandiseItemCellView: View {
     var body: some View {
         HStack {
             AsyncImage(url: product.mainProductImageURL!) { image in
-                image.mainProductImageStyle()
+                image.shoppingListProductImageStyle()
             } placeholder: {
-                Image.placeholderProductImage.mainProductImageStyle()
+                Image.placeholderProductImage.shoppingListProductImageStyle()
             }
             VStack(alignment: .leading) {
                 Text(product.title)
@@ -104,13 +119,6 @@ fileprivate struct ShoppingListMerchandiseItemCellView: View {
                 }
                 Spacer()
                     .frame(height: 10)
-                Button {
-                    shopLM.didSelectMerchandise(merchandise)
-                } label: {
-                    Text("Add")
-                        .foregroundColor(.targetRed)
-                }
-
             }
             Spacer()
         }

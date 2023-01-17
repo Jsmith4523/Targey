@@ -24,6 +24,34 @@ struct BarcodeScannerView: View {
                 BarcodeScannerOutputView(cameraModel: cameraModel)
                 BarcodeScannerBottomInstructionsView(cameraModel: cameraModel, searchModel: searchModel)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if cameraModel.deviceHasTorch {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: cameraModel.torchIsOn ? "flashlight.on.fill" : "flashlight.off.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 22, height: 22)
+                                .foregroundColor(cameraModel.torchIsOn ? .red : .white)
+                                .shadow(radius: 3)
+                        }
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 22)
+                            .foregroundColor(.white)
+                            .shadow(radius: 3)
+                    }
+                }
+            }
         }
         .accentColor(.targetRed)
         .preferredColorScheme(colorScheme)

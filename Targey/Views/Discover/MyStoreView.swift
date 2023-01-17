@@ -20,9 +20,6 @@ struct MyStoreView: View {
                 MyStoreNotSelectView(locationM: locationM)
             }
         }
-        .sheet(isPresented: $locationM.isShowingSelectNearbyStoreView) {
-            SelectFavoriteStoreView(locationManager: locationM)
-        }
     }
 }
 

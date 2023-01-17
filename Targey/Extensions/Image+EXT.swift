@@ -10,16 +10,17 @@ import SwiftUI
 
 extension Image {
     
-    static let placeholderProductImage = Image("placeholder-productImage")
-    static let dogOne                  = Image("dog-one")
-    static let dogTwo                  = Image("dog-two")
-    static let dogBag                  = Image("dog-bag")
-    static let cartwheel               = Image("cartwheel")
-    static let store                   = Image("store")
-    static let homeStore               = Image("home-store")
-    static let phoneuser               = Image("phone-user")
+    static let placeholderProductImage   = Image("placeholder-productImage")
+    static let dogOne                    = Image("dog-one")
+    static let dogTwo                    = Image("dog-two")
+    static let dogBag                    = Image("dog-bag")
+    static let cartwheel                 = Image("cartwheel")
+    static let store                     = Image("store")
+    static let homeStore                 = Image("home-store")
+    static let phoneuser                 = Image("phone-user")
+    static let dogPhone                  = Image("dog-phone")
+    static let dogPhoneBarcode           = Image("dog-phone-barcode")
 
-    
     func productImageStyle() -> some View {
         return self
             .resizable()
@@ -64,6 +65,15 @@ extension Image {
             .scaledToFill()
             .frame(width: 115, height: 115)
             .cornerRadius(5)
+    }
+    
+    ///For search results through Shopping List
+    func shoppingListProductImageStyle() -> some View {
+        return self
+            .resizable()
+            .scaledToFill()
+            .frame(width: 60, height: 60)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     
     ///Use within ScannedProductView on a products main image
