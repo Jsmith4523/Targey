@@ -36,6 +36,13 @@ extension product {
         return dcpi
     }
     
+    var productUpc: String {
+        guard let upc else {
+            return ""
+        }
+        return upc
+    }
+    
     var productBullets: [String] {
         guard let bullets = feature_bullets else {
             return [""]

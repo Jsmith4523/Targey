@@ -10,7 +10,7 @@ import CoreData
 
 extension ShoppingItem {
     
-    func calculation() -> String {
-        return "\(Double(Int(self.quantity) * (Int(self.price))))"
+    func calculation() -> Double {
+        return Double(Int(self.quantity) * Int(self.price))
     }
 }

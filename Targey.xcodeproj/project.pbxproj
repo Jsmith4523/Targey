@@ -25,6 +25,7 @@
 		2419226C2976223500FE2CB3 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2419226B2976223500FE2CB3 /* UserSettingsView.swift */; };
 		2419226E29763AAD00FE2CB3 /* SelectedItemInShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2419226D29763AAD00FE2CB3 /* SelectedItemInShoppingList.swift */; };
 		241922702976501A00FE2CB3 /* CDShopItem+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2419226F2976501A00FE2CB3 /* CDShopItem+EXT.swift */; };
+		241922742977009B00FE2CB3 /* MyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241922732977009B00FE2CB3 /* MyList.swift */; };
 		241EE922295F6F9B005F41D9 /* Shopping List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE921295F6F9B005F41D9 /* Shopping List.swift */; };
 		241EE924295F7629005F41D9 /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */; };
 		243BBC0029711A010098872A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243BBBFF29711A010098872A /* ViewController.swift */; };
@@ -100,6 +101,7 @@
 		2419226B2976223500FE2CB3 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 		2419226D29763AAD00FE2CB3 /* SelectedItemInShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedItemInShoppingList.swift; sourceTree = "<group>"; };
 		2419226F2976501A00FE2CB3 /* CDShopItem+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDShopItem+EXT.swift"; sourceTree = "<group>"; };
+		241922732977009B00FE2CB3 /* MyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyList.swift; sourceTree = "<group>"; };
 		241EE921295F6F9B005F41D9 /* Shopping List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shopping List.swift"; sourceTree = "<group>"; };
 		241EE923295F7629005F41D9 /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
 		243BBBFF29711A010098872A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -241,7 +243,7 @@
 			children = (
 				240C761C2952A52100C25880 /* Tab.swift */,
 				240C762C2952A64E00C25880 /* Discover.swift */,
-				24FB7A97295CA66C00C578E4 /* ShoppingList.swift */,
+				241922732977009B00FE2CB3 /* MyList.swift */,
 				240C76472954186E00C25880 /* Search.swift */,
 			);
 			path = Tab;
@@ -275,7 +277,7 @@
 			children = (
 				2419226A2976222500FE2CB3 /* User Settings */,
 				24F5BE65297093AC004BC04F /* Discover */,
-				241EE925296021EA005F41D9 /* Shopping List */,
+				241922712977007300FE2CB3 /* My List */,
 				24F6A02D29544F600032D4B3 /* Merchandise Search */,
 				24F6A03229557D4C0032D4B3 /* Onboarding */,
 				24A2DAEA296DE58100C79807 /* Progress Views */,
@@ -306,9 +308,26 @@
 			path = "User Settings";
 			sourceTree = "<group>";
 		};
+		241922712977007300FE2CB3 /* My List */ = {
+			isa = PBXGroup;
+			children = (
+				241922722977007B00FE2CB3 /* Favorites */,
+				241EE925296021EA005F41D9 /* Shopping List */,
+			);
+			path = "My List";
+			sourceTree = "<group>";
+		};
+		241922722977007B00FE2CB3 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		241EE925296021EA005F41D9 /* Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				24FB7A97295CA66C00C578E4 /* ShoppingList.swift */,
 				24C64302296A513B00BA5644 /* ShoppingListMerchandiseResultsView.swift */,
 				2499532D296A657500978543 /* ShoppingListManualEnterView.swift */,
 				24A2DB00296DFCC700C79807 /* ShoppingListEmptyView.swift */,
@@ -611,6 +630,7 @@
 				24A2DAE9296DE54600C79807 /* DogProgessView.swift in Sources */,
 				24F6A02A29544AD60032D4B3 /* UINav+EXT.swift in Sources */,
 				240C76342952DB4700C25880 /* SearchManager.swift in Sources */,
+				241922742977009B00FE2CB3 /* MyList.swift in Sources */,
 				24A2DAE4296DE12B00C79807 /* PromotionsManager.swift in Sources */,
 				24F6A040295590140032D4B3 /* ShoppingListManager.swift in Sources */,
 				24A2DAF6296DF05500C79807 /* ImageParralaxView.swift in Sources */,

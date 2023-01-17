@@ -14,9 +14,9 @@ struct Tab: View {
                 .tabItem {
                     Label("Discover", systemImage: "takeoutbag.and.cup.and.straw.fill")
                 }
-            ShoppingListView()
+            MyList()
                 .tabItem {
-                    Label("Shopping List", systemImage: "cart")
+                    Label("My List", systemImage: "checklist")
                 }
             SearchView()
                 .tabItem {

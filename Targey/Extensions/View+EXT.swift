@@ -32,11 +32,11 @@ extension View {
             .clipShape(Circle())
     }
     
-    func largeButtonStyle()  -> some View {
+    func largeButtonStyle(backgroundColor: Color = .targetRed)  -> some View {
         return self
             .padding()
             .foregroundColor(.white)
-            .background(Color.targetRed)
+            .background(backgroundColor)
             .clipShape(Circle())
     }
     

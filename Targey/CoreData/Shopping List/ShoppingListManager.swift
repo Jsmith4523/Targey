@@ -13,6 +13,10 @@ enum SaveError: Error {
     case error(String)
 }
 
+enum RemoveError: Error {
+    case error(String)
+}
+
 class ShoppingListManager {
     
     let container: NSPersistentContainer
@@ -28,20 +32,58 @@ class ShoppingListManager {
         }
     }
     
-    func save(completion: @escaping (Result<Bool, SaveError>) -> Void) {
+    ///Saves uncommited changes in CoreData model
+    func save(completion: @escaping (Result<Bool, SaveError>) throws -> Void) {
         do {
             try container.viewContext.save()
-            completion(.success(true))
+            try completion(.success(true))
         } catch {
-            completion(.failure(.error("We had a problem saving that item. Please try again")))
+            print("Unable to changes changes made to context. Rolling back to previous changes...")
+            container.viewContext.rollback()
+            do {
+                try completion(.failure(.error("We had a problem completing that request. Please try again")))
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
+    ///Remove item passed through the argument from CoreData
     func removeItem(_ shoppingItem: ShoppingItem) {
         container.viewContext.delete(shoppingItem)
+        
+        do {
+            try container.viewContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
-    ///Remove all ShoppingItem's
+    ///A User has selected items to be removedFromC
+    func checkOffCollectedItems(_ items: Set<ShoppingItem>) throws {
+        let generator = UINotificationFeedbackGenerator()
+        
+        items.forEach { item in
+            container.viewContext.delete(item)
+        }
+        
+        do {
+            try container.viewContext.save()
+            save { status in
+                switch status {
+                case .success(_):
+                    generator.notificationOccurred(.success)
+                case .failure(_):
+                    generator.notificationOccurred(.error)
+                    throw RemoveError.error("There was a problem removing items from your list")
+                }
+            }
+        } catch {
+            throw RemoveError.error("There was a problem removing items from your list")
+        }
+    }
+    
+    ///Remove all items from CoreData model
     func removeAll() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "ShoppingItem")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)

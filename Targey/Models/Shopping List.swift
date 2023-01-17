@@ -8,7 +8,8 @@
 import Foundation
 import CoreData
 
-struct ShoppingListItem: Identifiable {
+struct ShoppingListItem: Identifiable, Hashable {
+    var hashValue = Int.random(in: 1...500)
     var id = UUID()
     var didFind: Bool = false
     var quantity: Int = 1

@@ -26,7 +26,7 @@ struct SelectedItemInShoppingList: View {
                         VStack(alignment: .leading) {
                             Text("Price: \(item?.price ?? 0)")
                             Text("Quantity: \(Int(item?.quantity ?? 0))")
-                            Text("Total without Tax: $"+(item?.calculation() ?? ""))
+                            Text("Total without Tax: $\(item?.calculation() ?? 0)")
                             
                         }
                         .font(.system(size: 16))
