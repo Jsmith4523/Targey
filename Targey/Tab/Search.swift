@@ -99,9 +99,10 @@ fileprivate struct SearchInstruction: View {
                 .padding()
             Spacer()
         }
-        .padding()
     }
 }
+
+ 
 
 struct Previews_Search_Previews: PreviewProvider {
     static var previews: some View {
