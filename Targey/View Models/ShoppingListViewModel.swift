@@ -15,8 +15,15 @@ protocol ShoppingListDelegate {
 }
 
 final class ShoppingListViewModel: ObservableObject, ShoppingListDelegate {
+    
+    ///The totalAmount of the shopping list items
+    @Published var totalAmount: String?
 
-    @Published var shoppingItems = [ShoppingItem]()
+    @Published var shoppingItems = [ShoppingItem]() {
+        willSet {
+            totalAmount = ShoppingItem.getTotalOfEntireShoppingList(newValue)
+        }
+    }
     
     @Published var alertError = false
     @Published var alertErrorReason = ""

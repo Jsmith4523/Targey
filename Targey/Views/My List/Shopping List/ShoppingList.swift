@@ -61,7 +61,12 @@ fileprivate struct ShoppingListItemsView: View {
             
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack {
+            VStack(alignment: .leading) {
+                if let totalAmount = shopLM.totalAmount {
+                    Text("Total: \(totalAmount)")
+                        .padding()
+                        .font(.system(size: 18.5).weight(.semibold))
+                }
                 ForEach(shopLM.shoppingItems.sorted(by: {$0.name ?? "" > $1.name ?? ""})) { item in
                     ShoppingListItemCellView(collectedItems: $collectedItems, isCurrentlyEditing: $isCurrentlyEditing, item: item, shopLM: shopLM)
                     Divider()
@@ -151,9 +156,11 @@ struct ShoppingListItemCellView: View {
                             .font(.system(size: 17).bold())
                             .multilineTextAlignment(.leading)
                             .lineLimit(3)
-                        Text("$\(item.price)")
-                            .font(.system(size: 15))
-                            .multilineTextAlignment(.leading)
+                        if item.hasPrice {
+                            Text(item.priceFormatted)
+                                .font(.system(size: 15))
+                                .multilineTextAlignment(.leading)
+                        }
                     }
                     .foregroundColor(.reversed)
                     Text("x\(item.quantity)")

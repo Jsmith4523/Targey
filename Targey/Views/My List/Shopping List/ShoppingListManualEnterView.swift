@@ -52,6 +52,7 @@ struct ShoppingListManualEnterView: View {
                     Button("Save") {
                         prepareMerchandise()
                     }
+                    .disabled(name.isEmpty)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -74,7 +75,7 @@ struct ShoppingListManualEnterView: View {
     }
     
     private func prepareMerchandise() {
-        var merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, upc: "", feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: nil, symbol: .userCurrencySymbol, regular_price: Double(price))))
+        var merchandise = Merchandise(position: 0, product: .init(title: name, link: nil, tcin: tcin, dpci: dpci, upc: upc, feature_bullets: nil, rating: nil, rating_total: nil, main_image: nil, images: nil), offers: .init(primary: .init(price: self.price.isZero ? nil : Double(price), symbol: .userCurrencySymbol, regular_price: nil)))
         merchandise.product.upc = scannedUpc
         shopLM.addItemToShoppingList(merchandise, quantity: quantity) { didSave  in
             if didSave {
