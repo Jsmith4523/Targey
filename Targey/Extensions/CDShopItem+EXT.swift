@@ -12,12 +12,12 @@ extension ShoppingItem {
     
     ///Items price times its quantity with the user Locale Currency symbol
     var totalFormatted: String {
-        return String.userCurrencySymbol+String(format: "%0.2f", self.priceCalclated)
+        priceCalclated.fullStringPrice()
     }
     
     ///Items price not times its quantity
     var priceFormatted: String {
-        String.userCurrencySymbol+String(format: "%0.2f", self.price)
+        price.fullStringPrice()
     }
     
     ///If a shopping Item has a price or not
@@ -30,6 +30,7 @@ extension ShoppingItem {
         Double(Double(self.quantity) * self.price)
     }
     
+    ///Returns the total amount of items passed, formatted
     static func getTotalOfEntireShoppingList(_ items: [ShoppingItem]) -> String? {
         var finalAmount: Double = 0.00
         var amounts = [Double]()
@@ -43,7 +44,7 @@ extension ShoppingItem {
         }
         
         if !(finalAmount == 0.00) {
-            return String.userCurrencySymbol+String(format: "%0.2f", finalAmount)
+            return finalAmount.fullStringPrice()
         } else {
             return nil
         }

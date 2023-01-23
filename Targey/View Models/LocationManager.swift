@@ -127,7 +127,6 @@ class LocationServicesManager: NSObject, CLLocationManagerDelegate, ObservableOb
     private func fetchFavoriteSavedStore() {
         if let favoriteStore = UserDefaults.standard.data(forKey: "favoriteStore") {
             if let decodedStore = try? JSONDecoder().decode(NearbyStore.self, from: favoriteStore) {
-                print(decodedStore)
                 self.favoriteStore = decodedStore
             }
         } else {

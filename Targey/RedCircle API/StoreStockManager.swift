@@ -31,6 +31,7 @@ class StoreStockManager: RedCircle {
             
             let decoded = try? JSONDecoder().decode(StoreResponse.self, from: data)
             
+            
             if let stores = decoded {
                 withCompletion(.success(stores.store_stock_results))
             } else {

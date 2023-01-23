@@ -63,7 +63,7 @@ extension Image {
         return self
             .resizable()
             .scaledToFill()
-            .frame(width: 115, height: 115)
+            .frame(width: 95, height: 95)
             .cornerRadius(5)
     }
     

@@ -49,21 +49,33 @@ struct MerchandiseItemCellView: View {
     }
             
     @ObservedObject var searchModel: SearchViewModel
+    @StateObject private var nearestVM = NearestStoreModel()
+    
+    init(merchandise: Merchandise, searchModel: SearchViewModel) {
+        self.merchandise = merchandise
+        self.searchModel = searchModel
+        
+//        print("I'm created! \(Date.now.formatted(.dateTime.hour().minute())) for \(merchandise.product.title)")
+    }
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             AsyncImage(url: product.mainProductImageURL!) { image in
                 image.mainProductImageStyle()
             } placeholder: {
                 Image.placeholderProductImage.mainProductImageStyle()
             }
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text(product.title)
-                    .font(.system(size: 17).weight(.semibold))
+                    .font(.system(size: 16).weight(.semibold))
                     .multilineTextAlignment(.leading)
-                    .lineLimit(3)
+                    .lineLimit(2)
                 offer.primary.productPriceLabel
-                    .font(.system(size: 16.5))
+                    .font(.system(size: 16))
+                
+                if let nearestStore = nearestVM.store {
+                    Text(nearestStore.storeName)
+                }
             }
             Spacer()
         }

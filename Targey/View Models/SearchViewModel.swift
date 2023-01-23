@@ -45,18 +45,18 @@ final class SearchViewModel: ObservableObject, BarcodeScannerDelegate, UserZipCo
         self.isSearching = true
         self.didFailToSearch = false
         
-        searchManager.fetchProducts(term: term) { status in
+        searchManager.fetchProducts(term: term) { [weak self] status in
             switch status {
             case .success(let merchandises):
                 DispatchQueue.main.async {
-                    self.isSearching = false
-                    self.didFailToSearch = false
-                    self.merchandises = merchandises
+                    self?.isSearching = false
+                    self?.didFailToSearch = false
+                    self?.merchandises = merchandises
                 }
             case .failure(let failure):
                 DispatchQueue.main.async {
-                    self.isSearching = false
-                    self.didFailToSearch = true
+                    self?.isSearching = false
+                    self?.didFailToSearch = true
                 }
                 print(failure.rawValue)
             }

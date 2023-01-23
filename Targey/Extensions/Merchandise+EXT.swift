@@ -122,20 +122,13 @@ extension primary {
         return true
     }
     
-    var productSymbol: String {
-        guard let symbol = self.symbol else {
-            return "$"
-        }
-        return symbol
-    }
-    
     ///The sale price of a product
     var productSalePrice: String {
         guard let price = self.price else {
             return "Visit Store"
         }
         
-        return "\(productSymbol)\(price)"
+        return price.fullStringPrice()
     }
     
     ///The price of a product; will show only sale price if regular is nil
@@ -143,7 +136,7 @@ extension primary {
         var str = "Visit Store"
         
         if let regular = self.regular_price {
-            str = productSymbol+"\(regular)"
+            str = regular.fullStringPrice()
             return str
         }
         
@@ -151,7 +144,7 @@ extension primary {
             return str
         }
                 
-        str = productSymbol+"\(sale)"
+        str = sale.fullStringPrice()
         
         return str
     }

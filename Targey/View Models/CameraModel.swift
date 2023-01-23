@@ -41,6 +41,11 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AV
         self.cameraDelegate = cameraDelegate
     }
     
+    override init() {
+        super.init()
+        
+    }
+    
     func toggleTorch() {
         guard let device = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) else {
             print("This device is either a simulator or a device without a camera. In other words, you cannot access the camera! Sorry...")
@@ -181,6 +186,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AV
     }
 
     deinit {
+        ///When the view is destroyed and (maybe) someone forgets to stop the camera session from running
         session.stopRunning()
     }
 }

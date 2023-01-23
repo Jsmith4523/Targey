@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+        
     static var userCurrency: String {
         return Locale.current.currencyCode ?? "USD"
     }

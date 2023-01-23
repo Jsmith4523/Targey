@@ -38,7 +38,7 @@ struct ShoppingListBarcodeScannerView: View {
                 Spacer()
             }
         }
-        .statusBar(hidden: true)
+        .statusBarHidden(true)
         .sheet(isPresented: $isShowingManualEntryView) {
             ShoppingListManualEnterView(shopLM: shopLM, scannedUpc: searchModel.scannedUpc)
         }
@@ -51,10 +51,6 @@ struct ShoppingListBarcodeScannerView: View {
         .onAppear {
             cameraModel.setDelegate(barcodeDelegate: searchModel)
             cameraModel.beginSetup()
-        }
-        .onDisappear {
-//            print(deviceColorScheme)
-//            colorScheme = deviceColorScheme
         }
     }
 }
