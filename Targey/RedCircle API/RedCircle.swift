@@ -13,10 +13,10 @@ class RedCircle {
     
     init(resourceName: String = "Keys") {
         guard let resource = Bundle.main.path(forResource: resourceName, ofType: "plist"), let plist = NSDictionary(contentsOfFile: resource) else {
-            fatalError("Failed to find resource \(resourceName). I'm going to end it all now! 🔫")
+            fatalError("Unable to locate resource file within Bundle! Please check for file and try again!")
         }
         guard let key = plist.object(forKey: "RED_CIRCLE_API_KEY") as? String else {
-            fatalError("RED_CIRCLE_API_KEY cannot be found!")
+            fatalError("Please include your RedCircle API key within the Keys.plist file and try again!")
         }
         self.key = key
     }
