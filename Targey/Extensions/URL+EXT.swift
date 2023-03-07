@@ -12,7 +12,7 @@ extension URL {
     
     ///RedCircle API URL to fetch JSON by term
     static func searchURL(term: String) -> URL? {
-        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=EEE1A29603D0424CA2AE29CBEFE2EF64&type=search&search_term=\(term)&sort_by=best_seller") else {
+        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=API_KEY&type=search&search_term=\(term)&sort_by=best_seller") else {
             print("Cannot find anything by that term or url is broken!")
             return nil
         }
@@ -20,14 +20,14 @@ extension URL {
     }
     
     static func fetchStock(tcin: String, zipcode: String) -> URL? {
-        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=EEE1A29603D0424CA2AE29CBEFE2EF64&type=store_stock&store_stock_zipcode=\(zipcode)&tcin=\(tcin)") else {
+        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=API_KEY&type=store_stock&store_stock_zipcode=\(zipcode)&tcin=\(tcin)") else {
             return nil
         }
         return url
     }
     
     static func searchProductbyUPC(tcin: String, zipcode: String) -> URL? {
-        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=EEE1A29603D0424CA2AE29CBEFE2EF64&type=product&gtin=\(tcin)") else {
+        guard let url = URL(string: "https://api.redcircleapi.com/request?api_key=API_KEY&type=product&gtin=\(tcin)") else {
             return nil
         }
         return url
